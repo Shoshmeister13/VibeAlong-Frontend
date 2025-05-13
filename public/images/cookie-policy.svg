@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300" viewBox="0 0 500 300">
+  <circle cx="250" cy="150" r="120" fill="#f9e4b7" />
+  <circle cx="200" cy="100" r="20" fill="#8b4513" />
+  <circle cx="300" cy="120" r="20" fill="#8b4513" />
+  <circle cx="250" cy="180" r="20" fill="#8b4513" />
+  <circle cx="220" cy="220" r="20" fill="#8b4513" />
+  <circle cx="280" cy="80" r="20" fill="#8b4513" />
+  <text x="250" y="270" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">Cookie Policy</text>
+</svg>
