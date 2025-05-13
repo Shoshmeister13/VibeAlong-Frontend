@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation"
 import { EnhancedTaskSpace } from "@/components/task-space/enhanced-task-space"
 import { TaskSpaceAccessDenied } from "@/components/task-space/task-space-access-denied"
 
-export default async function TaskSpacePage({ params }: { params: { taskId: string } }) {
+export default async function TaskSpacePage({ params }: { params: { task_id: string } }) {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
 
@@ -71,7 +71,7 @@ export default async function TaskSpacePage({ params }: { params: { taskId: stri
         avatar_url
       )
     `)
-    .eq("id", params.taskId)
+    .eq("id", params.task_id)
     .single()
 
   if (error || !task) {

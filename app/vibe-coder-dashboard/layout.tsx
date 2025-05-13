@@ -9,6 +9,7 @@ import { HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Suspense } from "react"
+import { Sparkles } from "lucide-react"
 
 export default function VibeCoderDashboardLayout({
   children,
@@ -68,6 +69,19 @@ export default function VibeCoderDashboardLayout({
           <div className="flex flex-col md:flex-row w-full">
             <aside className="hidden md:block w-64 shrink-0 border-r pr-4 py-6 sticky top-16 self-start">
               <DashboardNav />
+
+              {/* Vibe Check Button */}
+              <div className="mt-6 pt-6 border-t">
+                <Link href="/dashboard/vibe-check">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start gap-2 border-dashed border-primary/50 hover:border-primary hover:bg-primary/5"
+                  >
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span className="font-medium">Run a Vibe Check</span>
+                  </Button>
+                </Link>
+              </div>
             </aside>
             <main className="flex-1 py-6 md:pl-6">
               <h1 className="text-3xl font-bold tracking-tight mb-4">E-commerce Platform</h1>

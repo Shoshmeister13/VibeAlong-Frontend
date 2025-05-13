@@ -185,7 +185,7 @@ export default function HomePage() {
                   </Button>
                 </Link>
               </div>
-            </div>
+              <p className="animate-in delay-300 mt-4 text-sm text-muted-foreground font-medium">Join more than 1400 Vibe Coders 🫵</p>
 
             {/* Platform Logos - Now part of Hero Section */}
             <div className="mt-16">

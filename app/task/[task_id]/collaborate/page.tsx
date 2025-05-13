@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 export default function TaskCollaborationRedirectPage() {
   const params = useParams()
   const router = useRouter()
-  const taskId = params.taskId as string
+  const taskId = params.task_id as string
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

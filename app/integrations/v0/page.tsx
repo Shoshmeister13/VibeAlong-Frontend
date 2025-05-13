@@ -21,20 +21,14 @@ import {
   Users,
   Clock,
 } from "lucide-react"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useSupabase } from "@/components/providers/supabase-provider"
-
-// Import site header and footer
-import SiteHeader from "@/components/site-header"
-import SiteFooter from "@/components/site-footer"
 
 export default function V0IntegrationPage() {
   const [activeTab, setActiveTab] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const code = searchParams.get("code")
-  const { supabase } = useSupabase()
 
   useEffect(() => {
     setIsVisible(true)
@@ -54,232 +48,6 @@ export default function V0IntegrationPage() {
 
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  // Check for auth code and redirect if needed
-  useEffect(() => {
-    if (code) {
-      console.log("Detected auth code in URL, redirecting to callback handler")
-      router.push(`/auth/callback?code=${code}`)
-    }
-  }, [code, router])
-
-  // Check session if redirect param is present
-  useEffect(() => {
-    const checkSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-      if (session) {
-        // Check if profile is completed
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("profile_completed, role")
-          .eq("id", session.user.id)
-          .single()
-
-        if (profile?.profile_completed) {
-          router.push("/dashboard")
-        } else {
-          // Get role from profile or user metadata
-          const role = profile?.role || session.user.user_metadata.role || "developer"
-          // Normalize role for URL
-          const normalizedRole = role === "vibe_coder" ? "vibe-coder" : role
-          router.push(`/onboarding/${normalizedRole}`)
-        }
-      }
-    }
-
-    // Only check session if there's a redirect param in the URL
-    const redirectToDashboard = searchParams.get("redirect")
-    if (redirectToDashboard === "true" && !code) {
-      checkSession()
-    }
-  }, [supabase, router, code, searchParams])
-
-  // If there's a code, show a loading state
-  if (code) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg">Verifying your email...</p>
-      </div>
-    )
-  }
-
-  // Value proposition cards data
-  const valuePropositionCards = [
-    {
-      icon: <Code className="h-8 w-8 text-white" />,
-      title: "Build screens fast with AI",
-      description: "Use v0.dev to rapidly generate beautiful UI components and screens with simple text prompts.",
-      colorFrom: "from-purple-600",
-      colorTo: "to-indigo-700",
-    },
-    {
-      icon: <Users className="h-8 w-8 text-white" />,
-      title: "Let experts add backend, auth, payments",
-      description: "Our vetted developers will implement all the functionality your app needs to work in production.",
-      colorFrom: "from-blue-600",
-      colorTo: "to-cyan-700",
-    },
-    {
-      icon: <Zap className="h-8 w-8 text-white" />,
-      title: "Focus on product — we handle the code",
-      description: "Concentrate on your product vision while our experts handle all the technical implementation.",
-      colorFrom: "from-emerald-600",
-      colorTo: "to-teal-700",
-    },
-  ]
-
-  // Expert services data
-  const expertServices = [
-    {
-      icon: <LockIcon className="h-6 w-6" />,
-      title: "Auth Setup",
-      description: "Secure user authentication and authorization",
-    },
-    {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      title: "API Connection",
-      description: "Connect to any third-party API",
-    },
-    {
-      icon: <Database className="h-6 w-6" />,
-      title: "Database Integration",
-      description: "Supabase/Xano setup and integration",
-    },
-    {
-      icon: <CreditCard className="h-6 w-6" />,
-      title: "Stripe Checkout",
-      description: "Payment processing and subscription management",
-    },
-    {
-      icon: <Mail className="h-6 w-6" />,
-      title: "Email Automation",
-      description: "Transactional emails and marketing automation",
-    },
-  ]
-
-  // How it works steps data
-  const howItWorksSteps = [
-    {
-      step: 1,
-      title: "Build screens in v0.dev",
-      description: "Create your UI with AI assistance",
-      icon: <Code className="h-5 w-5" />,
-    },
-    {
-      step: 2,
-      title: "Publish your project",
-      description: "Share your v0.dev project on VibeAlong",
-      icon: <ArrowRight className="h-5 w-5" />,
-    },
-    {
-      step: 3,
-      title: "Add tasks",
-      description: "Choose pre-made tasks or custom requests",
-      icon: <CheckCircle className="h-5 w-5" />,
-    },
-    {
-      step: 4,
-      title: "Get matched",
-      description: "We'll match you with the perfect expert",
-      icon: <Users className="h-5 w-5" />,
-    },
-    {
-      step: 5,
-      title: "Track & approve",
-      description: "Monitor progress and approve the final result",
-      icon: <Star className="h-5 w-5" />,
-    },
-  ]
-
-  // Task data for tabs
-  const taskData = {
-    frontend: [
-      { task: "Implement responsive design", complexity: "Low", hours: 3, price: 60 },
-      { task: "Add dark mode support", complexity: "Medium", hours: 4, price: 80 },
-      { task: "Create animated transitions", complexity: "Medium", hours: 5, price: 100 },
-      { task: "Build interactive components", complexity: "High", hours: 6, price: 120 },
-      { task: "Optimize for performance", complexity: "Medium", hours: 4, price: 80 },
-    ],
-    backend: [
-      { task: "Set up user authentication", complexity: "Medium", hours: 4, price: 80 },
-      { task: "Create REST API endpoints", complexity: "Medium", hours: 5, price: 100 },
-      { task: "Implement data validation", complexity: "Medium", hours: 3, price: 60 },
-      { task: "Set up database models", complexity: "High", hours: 6, price: 120 },
-      { task: "Add user roles and permissions", complexity: "High", hours: 5, price: 100 },
-    ],
-    integration: [
-      { task: "Connect Supabase database", complexity: "Medium", hours: 4, price: 80 },
-      { task: "Add Stripe checkout", complexity: "High", hours: 6, price: 120 },
-      { task: "Set up email notifications", complexity: "Medium", hours: 3, price: 60 },
-      { task: "Integrate with third-party APIs", complexity: "High", hours: 5, price: 100 },
-      { task: "Set up file uploads to cloud storage", complexity: "Medium", hours: 4, price: 80 },
-    ],
-  }
-
-  // Testimonial data
-  const testimonials = [
-    {
-      quote: "VibeAlong helped me turn my idea into a real app in 3 days — without writing a line of code.",
-      author: "Alex Chen",
-      role: "Founder at StartupName",
-      rating: 5,
-    },
-    {
-      quote:
-        "The developers at VibeAlong are incredible. They took my v0.dev designs and made them fully functional in record time.",
-      author: "Sarah Johnson",
-      role: "Product Manager",
-      rating: 5,
-    },
-    {
-      quote:
-        "I was amazed at how quickly the team was able to implement complex features like authentication and payments.",
-      author: "Michael Rodriguez",
-      role: "Indie Developer",
-      rating: 4,
-    },
-  ]
-
-  // FAQ data
-  const faqs = [
-    {
-      question: "How does the integration with v0.dev work?",
-      answer:
-        "You can design your UI with v0.dev, then share your project with VibeAlong. Our experts will implement the backend functionality, connect APIs, and make your design fully functional.",
-    },
-    {
-      question: "How much does it cost?",
-      answer:
-        "Pricing depends on the complexity of your project. We offer task-based pricing so you only pay for what you need. Most projects range from $60-$500 depending on requirements.",
-    },
-    {
-      question: "How long does it take to complete a project?",
-      answer:
-        "Most projects are completed within 1-7 days, depending on complexity. Simple tasks like authentication or API integration can be done in 1-2 days.",
-    },
-    {
-      question: "Do I own the code?",
-      answer:
-        "Yes, you own 100% of the code we deliver. We provide full source code access and you retain all intellectual property rights.",
-    },
-    {
-      question: "What if I'm not satisfied with the work?",
-      answer:
-        "We offer a satisfaction guarantee. If you're not happy with the work, we'll revise it until you're satisfied or provide a refund.",
-    },
-  ]
 
   return (
     <>
@@ -400,19 +168,37 @@ export default function V0IntegrationPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {valuePropositionCards.map((item, index) => (
+              {[
+                {
+                  icon: <Code className="h-8 w-8 text-white" />,
+                  title: "Build screens fast with AI",
+                  description:
+                    "Use v0.dev to rapidly generate beautiful UI components and screens with simple text prompts.",
+                  color: "from-purple-600 to-indigo-700",
+                },
+                {
+                  icon: <Users className="h-8 w-8 text-white" />,
+                  title: "Let experts add backend, auth, payments",
+                  description:
+                    "Our vetted developers will implement all the functionality your app needs to work in production.",
+                  color: "from-blue-600 to-cyan-700",
+                },
+                {
+                  icon: <Zap className="h-8 w-8 text-white" />,
+                  title: "Focus on product — we handle the code",
+                  description:
+                    "Concentrate on your product vision while our experts handle all the technical implementation.",
+                  color: "from-emerald-600 to-teal-700",
+                },
+              ].map((item, index) => (
                 <Card
                   key={index}
                   className="p-6 border-0 shadow-lg overflow-hidden relative group animate-on-scroll"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div
-                    className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.colorFrom} ${item.colorTo}`}
-                  ></div>
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}"></div>
                   <div className="flex flex-col h-full">
-                    <div
-                      className={`w-14 h-14 rounded-lg bg-gradient-to-br ${item.colorFrom} ${item.colorTo} flex items-center justify-center mb-6`}
-                    >
+                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-6">
                       {item.icon}
                     </div>
                     <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
@@ -444,7 +230,48 @@ export default function V0IntegrationPage() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {expertServices.map((item, index) => (
+              {[
+                {
+                  icon: <LockIcon className="h-6 w-6" />,
+                  title: "Auth Setup",
+                  description: "Secure user authentication and authorization",
+                },
+                {
+                  icon: (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                  ),
+                  title: "API Connection",
+                  description: "Connect to any third-party API",
+                },
+                {
+                  icon: <Database className="h-6 w-6" />,
+                  title: "Database Integration",
+                  description: "Supabase/Xano setup and integration",
+                },
+                {
+                  icon: <CreditCard className="h-6 w-6" />,
+                  title: "Stripe Checkout",
+                  description: "Payment processing and subscription management",
+                },
+                {
+                  icon: <Mail className="h-6 w-6" />,
+                  title: "Email Automation",
+                  description: "Transactional emails and marketing automation",
+                },
+              ].map((item, index) => (
                 <Card
                   key={index}
                   className="p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 animate-on-scroll"
@@ -478,7 +305,38 @@ export default function V0IntegrationPage() {
               <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-gray-200 via-black to-gray-200 -translate-y-1/2 z-0"></div>
 
               <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-                {howItWorksSteps.map((item, index) => (
+                {[
+                  {
+                    step: 1,
+                    title: "Build screens in v0.dev",
+                    description: "Create your UI with AI assistance",
+                    icon: <Code className="h-5 w-5" />,
+                  },
+                  {
+                    step: 2,
+                    title: "Publish your project",
+                    description: "Share your v0.dev project on VibeAlong",
+                    icon: <ArrowRight className="h-5 w-5" />,
+                  },
+                  {
+                    step: 3,
+                    title: "Add tasks",
+                    description: "Choose pre-made tasks or custom requests",
+                    icon: <CheckCircle className="h-5 w-5" />,
+                  },
+                  {
+                    step: 4,
+                    title: "Get matched",
+                    description: "We'll match you with the perfect expert",
+                    icon: <Users className="h-5 w-5" />,
+                  },
+                  {
+                    step: 5,
+                    title: "Track & approve",
+                    description: "Monitor progress and approve the final result",
+                    icon: <Star className="h-5 w-5" />,
+                  },
+                ].map((item, index) => (
                   <div
                     key={index}
                     className="relative z-10 flex flex-col items-center text-center animate-on-scroll"
@@ -540,7 +398,13 @@ export default function V0IntegrationPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {taskData.frontend.map((item, index) => (
+                      {[
+                        { task: "Implement responsive design", complexity: "Low", hours: 3, price: 60 },
+                        { task: "Add dark mode support", complexity: "Medium", hours: 4, price: 80 },
+                        { task: "Create animated transitions", complexity: "Medium", hours: 5, price: 100 },
+                        { task: "Build interactive components", complexity: "High", hours: 6, price: 120 },
+                        { task: "Optimize for performance", complexity: "Medium", hours: 4, price: 80 },
+                      ].map((item, index) => (
                         <TableRow key={index}>
                           <TableCell className="font-medium">{item.task}</TableCell>
                           <TableCell>
@@ -580,7 +444,13 @@ export default function V0IntegrationPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {taskData.backend.map((item, index) => (
+                      {[
+                        { task: "Set up user authentication", complexity: "Medium", hours: 4, price: 80 },
+                        { task: "Create REST API endpoints", complexity: "Medium", hours: 5, price: 100 },
+                        { task: "Implement data validation", complexity: "Medium", hours: 3, price: 60 },
+                        { task: "Set up database models", complexity: "High", hours: 6, price: 120 },
+                        { task: "Add user roles and permissions", complexity: "High", hours: 5, price: 100 },
+                      ].map((item, index) => (
                         <TableRow key={index}>
                           <TableCell className="font-medium">{item.task}</TableCell>
                           <TableCell>
@@ -620,7 +490,13 @@ export default function V0IntegrationPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {taskData.integration.map((item, index) => (
+                      {[
+                        { task: "Connect Supabase database", complexity: "Medium", hours: 4, price: 80 },
+                        { task: "Add Stripe checkout", complexity: "High", hours: 6, price: 120 },
+                        { task: "Set up email notifications", complexity: "Medium", hours: 3, price: 60 },
+                        { task: "Integrate with third-party APIs", complexity: "High", hours: 5, price: 100 },
+                        { task: "Set up file uploads to cloud storage", complexity: "Medium", hours: 4, price: 80 },
+                      ].map((item, index) => (
                         <TableRow key={index}>
                           <TableCell className="font-medium">{item.task}</TableCell>
                           <TableCell>
@@ -665,7 +541,28 @@ export default function V0IntegrationPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((item, index) => (
+              {[
+                {
+                  quote: "VibeAlong helped me turn my idea into a real app in 3 days — without writing a line of code.",
+                  author: "Alex Chen",
+                  role: "Founder at StartupName",
+                  rating: 5,
+                },
+                {
+                  quote:
+                    "The developers at VibeAlong are incredible. They took my v0.dev designs and made them fully functional in record time.",
+                  author: "Sarah Johnson",
+                  role: "Product Manager",
+                  rating: 5,
+                },
+                {
+                  quote:
+                    "I was amazed at how quickly the team was able to implement complex features like authentication and payments.",
+                  author: "Michael Rodriguez",
+                  role: "Indie Developer",
+                  rating: 4,
+                },
+              ].map((item, index) => (
                 <Card
                   key={index}
                   className="p-8 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 animate-on-scroll"
@@ -706,7 +603,33 @@ export default function V0IntegrationPage() {
             </div>
 
             <div className="space-y-4 animate-on-scroll">
-              {faqs.map((item, index) => (
+              {[
+                {
+                  question: "How does the integration with v0.dev work?",
+                  answer:
+                    "You can design your UI with v0.dev, then share your project with VibeAlong. Our experts will implement the backend functionality, connect APIs, and make your design fully functional.",
+                },
+                {
+                  question: "How much does it cost?",
+                  answer:
+                    "Pricing depends on the complexity of your project. We offer task-based pricing so you only pay for what you need. Most projects range from $60-$500 depending on requirements.",
+                },
+                {
+                  question: "How long does it take to complete a project?",
+                  answer:
+                    "Most projects are completed within 1-7 days, depending on complexity. Simple tasks like authentication or API integration can be done in 1-2 days.",
+                },
+                {
+                  question: "Do I own the code?",
+                  answer:
+                    "Yes, you own 100% of the code we deliver. We provide full source code access and you retain all intellectual property rights.",
+                },
+                {
+                  question: "What if I'm not satisfied with the work?",
+                  answer:
+                    "We offer a satisfaction guarantee. If you're not happy with the work, we'll revise it until you're satisfied or provide a refund.",
+                },
+              ].map((item, index) => (
                 <Card key={index} className="border border-gray-200">
                   <div className="p-6">
                     <h3 className="text-lg font-semibold mb-2">{item.question}</h3>
@@ -758,4 +681,68 @@ export default function V0IntegrationPage() {
       <SiteFooter />
     </>
   )
+}
+
+function HomePageContent() {
+  return <V0IntegrationPage />
+}
+
+export default function HomePage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const code = searchParams.get("code")
+  const { supabase } = useSupabase()
+
+  useEffect(() => {
+    // If there's an auth code in the URL, redirect to the callback handler
+    if (code) {
+      console.log("Detected auth code in root URL, redirecting to callback handler")
+      router.push(`/auth/callback?code=${code}`)
+    }
+  }, [code, router])
+
+  // Only check session if explicitly requested via a query param
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+      if (session) {
+        // Check if profile is completed
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("profile_completed, role")
+          .eq("id", session.user.id)
+          .single()
+
+        if (profile?.profile_completed) {
+          router.push("/dashboard")
+        } else {
+          // Get role from profile or user metadata
+          const role = profile?.role || session.user.user_metadata.role || "developer"
+          // Normalize role for URL
+          const normalizedRole = role === "vibe_coder" ? "vibe-coder" : role
+          router.push(`/onboarding/${normalizedRole}`)
+        }
+      }
+    }
+
+    // Only check session if there's a redirect param in the URL
+    const redirectToDashboard = searchParams.get("redirect")
+    if (redirectToDashboard === "true" && !code) {
+      checkSession()
+    }
+  }, [supabase, router, code, searchParams])
+
+  // If there's a code, show a loading state
+  if (code) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg">Verifying your email...</p>
+      </div>
+    )
+  }
+
+  // Otherwise, render the normal home page
+  return <HomePageContent />
 }

@@ -81,7 +81,7 @@ const MOCK_TASK = {
 
 export default function DeveloperTaskCollaborationPage() {
   const params = useParams()
-  const taskId = params.taskId as string
+  const taskId = params.task_id as string
   const [loading, setLoading] = useState(true)
   const [task, setTask] = useState<any>(null)
 
