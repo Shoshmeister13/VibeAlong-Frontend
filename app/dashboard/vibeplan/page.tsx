@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Clock, CreditCard, Filter, Search, Users, Plus, ChevronDown, MoreHorizontal } from "lucide-react"
@@ -228,6 +227,23 @@ export default function VibePlanPage() {
     </motion.div>
   )
 
+  // Calculate summary values
+  const totalTasks = tasks.length
+  const estimatedTime = tasks.reduce((sum, task) => sum + task.estimate, 0)
+  const vibeAlongTime = Math.ceil(estimatedTime / 4)
+  const estimatedCredits = tasks.reduce((sum, task) => sum + task.credits, 0)
+
+  const summary = {
+    totalTasks: tasks.length,
+    completedTasks: doneTasks.length,
+    estimatedHours: estimatedTime,
+    remainingHours: totalEstimate - estimatedTime,
+    vibeAlongCount: vibeAlongTime,
+    vibeAlongActive: Math.floor(vibeAlongTime / 2),
+    credits: estimatedCredits,
+    creditsUsed: Math.floor(estimatedCredits / 3),
+  }
+
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
@@ -247,45 +263,38 @@ export default function VibePlanPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <Card>
-          <CardHeader className="py-4">
-            <CardTitle className="text-sm font-medium text-gray-500">Total Tasks</CardTitle>
-          </CardHeader>
-          <CardContent className="py-0">
-            <div className="text-3xl font-bold">{tasks.length}</div>
-            <p className="text-sm text-gray-500 mt-1">{highPriorityCount} high priority</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="py-4">
-            <CardTitle className="text-sm font-medium text-gray-500">Estimated Time</CardTitle>
-          </CardHeader>
-          <CardContent className="py-0">
-            <div className="text-3xl font-bold">{totalEstimate} hours</div>
-            <p className="text-sm text-gray-500 mt-1">~{Math.ceil(totalEstimate / 40)} weeks DIY</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="py-4">
-            <CardTitle className="text-sm font-medium text-gray-500">With VibeAlong</CardTitle>
-          </CardHeader>
-          <CardContent className="py-0">
-            <div className="text-3xl font-bold">~{Math.ceil(totalEstimate / 40 / 4)} week</div>
-            <p className="text-sm text-gray-500 mt-1">4x faster completion</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="py-4">
-            <CardTitle className="text-sm font-medium text-gray-500">Total Credits</CardTitle>
-          </CardHeader>
-          <CardContent className="py-0">
-            <div className="text-3xl font-bold">{totalCredits}</div>
-            <p className="text-sm text-gray-500 mt-1">~${totalCredits} USD value</p>
-          </CardContent>
-        </Card>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Tasks</h3>
+            <span className="text-xl">📋</span>
+          </div>
+          <p className="text-2xl font-bold mt-1">{summary.totalTasks}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{summary.completedTasks} completed</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Est. Time</h3>
+            <span className="text-xl">⏱️</span>
+          </div>
+          <p className="text-2xl font-bold mt-1">{summary.estimatedHours}h</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{summary.remainingHours}h remaining</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">VibeAlong</h3>
+            <span className="text-xl">🚀</span>
+          </div>
+          <p className="text-2xl font-bold mt-1">{summary.vibeAlongCount}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{summary.vibeAlongActive} active</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Credits</h3>
+            <span className="text-xl">💰</span>
+          </div>
+          <p className="text-2xl font-bold mt-1">{summary.credits}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{summary.creditsUsed} used this month</p>
+        </div>
       </div>
 
       {/* Filters and Search */}

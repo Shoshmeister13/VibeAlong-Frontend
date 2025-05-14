@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Sparkles, Github, Code, Cloud, Check, X } from "lucide-react"
+import { Sparkles, Github, Code, Cloud, Check, X, Plus } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
@@ -25,7 +25,7 @@ export function TaskOnboardingModal({ isOpen, onClose, task, onComplete }: TaskO
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [collaborationSteps, setCollaborationSteps] = useState<Array<{ id: string; text: string; completed: boolean }>>(
-    []
+    [],
   )
   const [taskSteps, setTaskSteps] = useState<Array<{ id: string; text: string; completed: boolean }>>([])
   const [additionalNotes, setAdditionalNotes] = useState("")
@@ -43,8 +43,8 @@ export function TaskOnboardingModal({ isOpen, onClose, task, onComplete }: TaskO
     if (task.suggested_steps && Array.isArray(task.suggested_steps)) {
       const formattedSteps = task.suggested_steps.map((step: any, index: number) => ({
         id: `task-${index + 1}`,
-        text: typeof step === 'string' ? step : step.step || step.description || `Step ${index + 1}`,
-        completed: false
+        text: typeof step === "string" ? step : step.step || step.description || `Step ${index + 1}`,
+        completed: false,
       }))
       setTaskSteps(formattedSteps)
     } else {
@@ -61,9 +61,17 @@ export function TaskOnboardingModal({ isOpen, onClose, task, onComplete }: TaskO
     switch (platform.toLowerCase()) {
       case "v0":
         return [
-          { id: "collab-1", text: "Request access to the project repository to start collaborating on code", completed: false },
+          {
+            id: "collab-1",
+            text: "Request access to the project repository to start collaborating on code",
+            completed: false,
+          },
           { id: "collab-2", text: "Ask the Vibe Coder to add you to the V0 platform", completed: false },
-          { id: "collab-3", text: "Ensure you have access to the necessary cloud resources and services", completed: false },
+          {
+            id: "collab-3",
+            text: "Ensure you have access to the necessary cloud resources and services",
+            completed: false,
+          },
         ]
       case "replit":
         return [
@@ -104,16 +112,16 @@ export function TaskOnboardingModal({ isOpen, onClose, task, onComplete }: TaskO
     onComplete({
       collaborationSteps,
       taskSteps,
-      additionalNotes
+      additionalNotes,
     })
-    
+
     toast({
       title: "Task setup completed",
       description: "You're all set to start working on this task!",
     })
-    
+
     onClose()
-    
+
     // Navigate to task space
     if (task.id) {
       router.push(`/task/${task.id}/collaborate`)
@@ -173,16 +181,12 @@ export function TaskOnboardingModal({ isOpen, onClose, task, onComplete }: TaskO
       <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {currentStep === 1 
-              ? "Task Setup" 
-              : currentStep === 2 
-                ? "Task Steps" 
-                : "Task Summary"}
+            {currentStep === 1 ? "Task Setup" : currentStep === 2 ? "Task Steps" : "Task Summary"}
           </DialogTitle>
           <DialogDescription>
-            {currentStep === 1 
-              ? "Let's set up your collaboration environment for this task." 
-              : currentStep === 2 
+            {currentStep === 1
+              ? "Let's set up your collaboration environment for this task."
+              : currentStep === 2
                 ? "Define the steps needed to complete this task."
                 : "Review your task details before getting started."}
           </DialogDescription>
@@ -353,4 +357,174 @@ export function TaskOnboardingModal({ isOpen, onClose, task, onComplete }: TaskO
                               size="icon"
                               variant="ghost"
                               className="h-6 w-6"
-                              onClick={() => startEditingStep(step.id, step.text)}\
+                              onClick={() => startEditingStep(step.id, step.text)}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="h-4 w-4"
+                              >
+                                <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                <path d="m15 5 4 4" />
+                              </svg>
+                            </Button>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="h-6 w-6"
+                              onClick={() => deleteStep(taskSteps, setTaskSteps, step.id)}
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {isAddingStep ? (
+                  <div className="flex items-center gap-2 mt-2">
+                    <Input
+                      value={newStepText}
+                      onChange={(e) => setNewStepText(e.target.value)}
+                      placeholder="Enter new step..."
+                      className="flex-1 text-sm"
+                    />
+                    <Button size="sm" variant="outline" onClick={() => addNewStep(taskSteps, setTaskSteps, "task")}>
+                      Add
+                    </Button>
+                    <Button size="sm" variant="ghost" onClick={() => setIsAddingStep(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="mt-2"
+                    onClick={() => {
+                      setIsAddingStep(true)
+                      setNewStepText("")
+                    }}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Step
+                  </Button>
+                )}
+              </div>
+
+              <div className="space-y-2 mt-6">
+                <h3 className="text-lg font-medium">Additional Notes</h3>
+                <textarea
+                  value={additionalNotes}
+                  onChange={(e) => setAdditionalNotes(e.target.value)}
+                  placeholder="Add any additional notes or requirements for this task..."
+                  className="w-full h-24 p-2 border rounded-md text-sm"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Task Summary */}
+          {currentStep === 3 && (
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="text-lg font-medium flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-blue-500" />
+                  Task Summary
+                </h3>
+                <p className="text-sm text-muted-foreground">Review your task setup before getting started.</p>
+              </div>
+
+              <div className="space-y-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-medium mb-2">Task Details</h4>
+                    <div className="space-y-2">
+                      <div>
+                        <span className="text-sm font-medium">Title:</span>
+                        <span className="text-sm ml-2">{task.title}</span>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium">Description:</span>
+                        <p className="text-sm text-muted-foreground">{task.description}</p>
+                      </div>
+                      {task.deadline && (
+                        <div>
+                          <span className="text-sm font-medium">Deadline:</span>
+                          <span className="text-sm ml-2">{formatDate(task.deadline)}</span>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-medium mb-2">Collaboration Steps</h4>
+                    <div className="space-y-2">
+                      {collaborationSteps.map((step) => (
+                        <div key={step.id} className="flex items-start gap-2">
+                          <div
+                            className={`flex-shrink-0 w-5 h-5 mt-0.5 border rounded ${
+                              step.completed ? "bg-primary border-primary" : "border-gray-300"
+                            }`}
+                          >
+                            {step.completed && <Check className="h-4 w-4 text-white" />}
+                          </div>
+                          <span className="text-sm">{step.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-medium mb-2">Task Steps</h4>
+                    <div className="space-y-2">
+                      {taskSteps.map((step) => (
+                        <div key={step.id} className="flex items-start gap-2">
+                          <div
+                            className={`flex-shrink-0 w-5 h-5 mt-0.5 border rounded ${
+                              step.completed ? "bg-primary border-primary" : "border-gray-300"
+                            }`}
+                          >
+                            {step.completed && <Check className="h-4 w-4 text-white" />}
+                          </div>
+                          <span className="text-sm">{step.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {additionalNotes && (
+                  <Card>
+                    <CardContent className="p-4">
+                      <h4 className="font-medium mb-2">Additional Notes</h4>
+                      <p className="text-sm text-muted-foreground">{additionalNotes}</p>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-between mt-6">
+          <Button variant="outline" onClick={currentStep === 1 ? onClose : handlePrevStep}>
+            {currentStep === 1 ? "Cancel" : "Back"}
+          </Button>
+          <Button onClick={handleNextStep}>{currentStep < 3 ? "Next" : "Complete Setup"}</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}

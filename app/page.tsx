@@ -43,7 +43,7 @@ import { motion } from "framer-motion"
 export default function HomePage() {
   // State to control banner visibility
   const [showBanner, setShowBanner] = useState(true)
-  
+
   // Form schema
   const formSchema = z.object({
     fullName: z.string().min(2, "Full name must be at least 2 characters."),
@@ -175,16 +175,16 @@ export default function HomePage() {
                   Ready to see if your project vibes? Run a free <span className="font-bold">VibeCheck</span> today!
                 </p>
                 <Link href="/vibecheck/start">
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     className="bg-white text-gray-800 hover:bg-gray-100 hover:text-black transition-transform hover:scale-105"
                   >
                     Start VibeCheck 🚀
                   </Button>
                 </Link>
               </div>
-              <button 
-                className="absolute right-0 text-white/80 hover:text-white transition-all hover:rotate-90" 
+              <button
+                className="absolute right-0 text-white/80 hover:text-white transition-all hover:rotate-90"
                 aria-label="Dismiss banner"
                 onClick={() => setShowBanner(false)}
               >
@@ -225,21 +225,24 @@ export default function HomePage() {
                   </Button>
                 </Link>
               </div>
-              <p className="animate-in delay-300 mt-4 text-sm text-muted-foreground font-medium">Join more than 1400 Vibe Coders 🫵</p>
+              <p className="animate-in delay-300 mt-4 text-sm text-muted-foreground font-medium">
+                Join more than 1400 Vibe Coders 🫵
+              </p>
 
-            {/* Platform Logos - Now part of Hero Section */}
-            <div className="mt-16">
-              <div className="text-center mb-8">
-                <h2 className="text-xl font-semibold mb-2">Works with your favorite vibe-coding platforms</h2>
-                <p className="text-muted-foreground">Seamlessly integrate with the tools you already use</p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-8 items-center">
-                {primaryVibePlatforms.map((platform) => (
-                  <div key={platform.id} className="flex flex-col items-center gap-2">
-                    <div className="text-primary">{platform.logo}</div>
-                    <span className="text-sm font-medium">{platform.name}</span>
-                  </div>
-                ))}
+              {/* Platform Logos - Now part of Hero Section */}
+              <div className="mt-16">
+                <div className="text-center mb-8">
+                  <h2 className="text-xl font-semibold mb-2">Works with your favorite vibe-coding platforms</h2>
+                  <p className="text-muted-foreground">Seamlessly integrate with the tools you already use</p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-8 items-center">
+                  {primaryVibePlatforms.map((platform) => (
+                    <div key={platform.id} className="flex flex-col items-center gap-2">
+                      <div className="text-primary">{platform.logo}</div>
+                      <span className="text-sm font-medium">{platform.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -530,73 +533,92 @@ export default function HomePage() {
         <section className="py-24 bg-gray-50 border-y border-gray-200">
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">⚡ The Rise of Vibe-Coding & Why Speed Matters More Than Ever</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                ⚡ The Rise of Vibe-Coding & Why Speed Matters More Than Ever
+              </h2>
             </div>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left column - Text and stats */}
               <div>
                 <h3 className="text-2xl font-bold mb-6">🧠 Building has never been easier — or more competitive.</h3>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
                       <Rocket className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium">Over <span className="font-bold">400,000 projects</span> launched last year using tools like v0, Replit, Supabase</p>
+                      <p className="font-medium">
+                        Over <span className="font-bold">400,000 projects</span> launched last year using tools like v0,
+                        Replit, Supabase
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
                       <Timer className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium"><span className="font-bold">Time-to-market expectations</span> dropped <span className="font-bold">40%</span> since 2021</p>
+                      <p className="font-medium">
+                        <span className="font-bold">Time-to-market expectations</span> dropped{" "}
+                        <span className="font-bold">40%</span> since 2021
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
                       <TrendingDown className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium"><span className="font-bold">60% of indie builds fail to ship</span> due to unfinished backends or blocked dev work</p>
+                      <p className="font-medium">
+                        <span className="font-bold">60% of indie builds fail to ship</span> due to unfinished backends
+                        or blocked dev work
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
                       <Brain className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium">AI can build UI fast — but real shipping still requires real dev support</p>
+                      <p className="font-medium">
+                        AI can build UI fast — but real shipping still requires real dev support
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
                       <LightbulbOff className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium">The MVP is dead. The new standard is the <span className="font-bold">MPP: Minimal Perfect Product</span></p>
+                      <p className="font-medium">
+                        The MVP is dead. The new standard is the{" "}
+                        <span className="font-bold">MPP: Minimal Perfect Product</span>
+                      </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <p className="mt-8 text-lg font-medium text-center">Don't just launch fast — launch right.</p>
-                
+
                 <div className="mt-6 text-center">
                   <Link href="/vibecheck/start">
-                    <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transition-colors">
+                    <Button
+                      variant="outline"
+                      className="border-black text-black hover:bg-black hover:text-white transition-colors"
+                    >
                       See how VibeAlong helps
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
                 </div>
               </div>
-              
+
               {/* Right column - Visual */}
               <div className="relative">
                 <div className="relative h-[400px] w-full rounded-lg overflow-hidden shadow-lg border border-gray-200">
@@ -609,7 +631,7 @@ export default function HomePage() {
                         repeat: Number.POSITIVE_INFINITY,
                         repeatType: "reverse",
                         duration: 2,
-                        ease: "easeInOut"
+                        ease: "easeInOut",
                       }}
                       className="relative"
                     >
@@ -617,7 +639,7 @@ export default function HomePage() {
                       <Rocket className="h-32 w-32 text-white" />
                     </motion.div>
                   </div>
-                  
+
                   {/* Stats overlay */}
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
                     <div className="grid grid-cols-3 gap-4">
@@ -636,17 +658,36 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Code snippet */}
                 <div className="absolute -bottom-6 -right-6 w-64 h-32 bg-white rounded-lg shadow-lg border border-gray-200 p-3 rotate-6">
                   <div className="text-xs font-mono text-gray-800 overflow-hidden h-full">
                     <div className="text-gray-500">// AI generated in seconds</div>
-                    <div><span className="text-purple-600">function</span> <span className="text-blue-600">launchFaster</span>() {'{'}</div>
-                    <div>  <span className="text-purple-600">const</span> idea = <span className="text-green-600">"Your brilliant concept"</span>;</div>
-                    <div>  <span className="text-purple-600">const</span> vibeCode = <span className="text-blue-600">generateWithAI</span>(idea);</div>
-                    <div>  <span className="text-purple-600">const</span> prodReady = <span className="text-blue-600">vibeAlong</span>(vibeCode);</div>
-                    <div>  <span className="text-purple-600">return</span> <span className="text-blue-600">ship</span>(prodReady);</div>
-                    <div>{'}'}</div>
+                    <div>
+                      <span className="text-purple-600">function</span>{" "}
+                      <span className="text-blue-600">launchFaster</span>() {"{"}
+                    </div>
+                    <div>
+                      {" "}
+                      <span className="text-purple-600">const</span> idea ={" "}
+                      <span className="text-green-600">"Your brilliant concept"</span>;
+                    </div>
+                    <div>
+                      {" "}
+                      <span className="text-purple-600">const</span> vibeCode ={" "}
+                      <span className="text-blue-600">generateWithAI</span>(idea);
+                    </div>
+                    <div>
+                      {" "}
+                      <span className="text-purple-600">const</span> prodReady ={" "}
+                      <span className="text-blue-600">vibeAlong</span>(vibeCode);
+                    </div>
+                    <div>
+                      {" "}
+                      <span className="text-purple-600">return</span> <span className="text-blue-600">ship</span>
+                      (prodReady);
+                    </div>
+                    <div>{"}"}</div>
                   </div>
                 </div>
               </div>
@@ -827,8 +868,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* CTA Section - Changed to white background */}
 
         {/* Developer Application Form Section */}
         <section

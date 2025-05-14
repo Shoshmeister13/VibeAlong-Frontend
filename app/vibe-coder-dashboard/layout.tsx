@@ -5,11 +5,10 @@ import { UserNav } from "@/components/dashboard/user-nav"
 import { MobileNav } from "@/components/dashboard/mobile-nav"
 import { NotificationsDropdown } from "@/components/dashboard/notifications-dropdown"
 import { AiSuggestionsDropdown } from "@/components/dashboard/ai-suggestions-dropdown"
-import { HelpCircle } from "lucide-react"
+import { HelpCircle, Sparkles, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Suspense } from "react"
-import { Sparkles } from "lucide-react"
 
 export default function VibeCoderDashboardLayout({
   children,
@@ -69,6 +68,27 @@ export default function VibeCoderDashboardLayout({
           <div className="flex flex-col md:flex-row w-full">
             <aside className="hidden md:block w-64 shrink-0 border-r pr-4 py-6 sticky top-16 self-start">
               <DashboardNav />
+
+              {/* Vibe Plan and Vibe Check Results Links */}
+              <div className="mt-6 space-y-3">
+                <h3 className="text-sm font-medium text-muted-foreground px-2">Vibe Analysis</h3>
+                <div className="space-y-1">
+                  <Link
+                    href="/dashboard/vibeplan"
+                    className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                  >
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span>Vibe Plan</span>
+                  </Link>
+                  <Link
+                    href="/dashboard/vibecheck"
+                    className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                  >
+                    <CheckCircle className="h-4 w-4 text-primary" />
+                    <span>Vibe Check Results</span>
+                  </Link>
+                </div>
+              </div>
 
               {/* Vibe Check Button */}
               <div className="mt-6 pt-6 border-t">

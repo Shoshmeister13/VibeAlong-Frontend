@@ -188,6 +188,16 @@ export function DashboardNav() {
       icon: CheckSquare,
     },
     {
+      title: "Vibe Analysis",
+      href: "/dashboard/vibecheck",
+      icon: Sparkles,
+    },
+    {
+      title: "Vibe Plan",
+      href: "/dashboard/vibeplan",
+      icon: FolderKanban,
+    },
+    {
       title: "All Developers",
       href: "/dashboard/my-developers",
       icon: Code,
