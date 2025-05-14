@@ -17,6 +17,10 @@ import { BarChart } from "lucide-react"
 import { Database } from "lucide-react"
 import { Minus } from "lucide-react"
 import { X } from "lucide-react"
+import { Timer } from "lucide-react"
+import { TrendingDown } from "lucide-react"
+import { Brain } from "lucide-react"
+import { LightbulbOff } from "lucide-react"
 import Link from "next/link"
 import { primaryVibePlatforms } from "@/components/vibe-platform-logos"
 import Image from "next/image"
@@ -31,11 +35,15 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { toast } from "@/components/ui/use-toast"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useSupabase } from "@/components/providers/supabase-provider"
+import { motion } from "framer-motion"
 
 export default function HomePage() {
+  // State to control banner visibility
+  const [showBanner, setShowBanner] = useState(true)
+  
   // Form schema
   const formSchema = z.object({
     fullName: z.string().min(2, "Full name must be at least 2 characters."),
@@ -154,6 +162,38 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
+      {/* Sticky VibeCheck Banner */}
+      {showBanner && (
+        <div className="sticky top-16 z-40 w-full border-b bg-gradient-to-r from-gray-800 to-black text-white shadow-md animate-in fade-in duration-300">
+          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5">
+            <div className="flex items-center justify-center relative">
+              <div className="flex items-center space-x-3">
+                <div className="flex items-center justify-center bg-white rounded-full w-8 h-8 shadow-sm animate-pulse">
+                  <span className="text-lg">✨</span>
+                </div>
+                <p className="text-sm font-medium sm:text-base">
+                  Ready to see if your project vibes? Run a free <span className="font-bold">VibeCheck</span> today!
+                </p>
+                <Link href="/vibecheck/start">
+                  <Button 
+                    size="sm" 
+                    className="bg-white text-gray-800 hover:bg-gray-100 hover:text-black transition-transform hover:scale-105"
+                  >
+                    Start VibeCheck 🚀
+                  </Button>
+                </Link>
+              </div>
+              <button 
+                className="absolute right-0 text-white/80 hover:text-white transition-all hover:rotate-90" 
+                aria-label="Dismiss banner"
+                onClick={() => setShowBanner(false)}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <main className="flex-1">
         {/* Hero Section - White Background */}
         <section className="relative overflow-hidden py-24 md:py-36 bg-white">
@@ -481,6 +521,134 @@ export default function HomePage() {
                     <span className="text-white/90">Ongoing support options</span>
                   </li>
                 </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: The Rise of Vibe-Coding & Why Speed Matters */}
+        <section className="py-24 bg-gray-50 border-y border-gray-200">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">⚡ The Rise of Vibe-Coding & Why Speed Matters More Than Ever</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left column - Text and stats */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">🧠 Building has never been easier — or more competitive.</h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                      <Rocket className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">Over <span className="font-bold">400,000 projects</span> launched last year using tools like v0, Replit, Supabase</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                      <Timer className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium"><span className="font-bold">Time-to-market expectations</span> dropped <span className="font-bold">40%</span> since 2021</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                      <TrendingDown className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium"><span className="font-bold">60% of indie builds fail to ship</span> due to unfinished backends or blocked dev work</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                      <Brain className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">AI can build UI fast — but real shipping still requires real dev support</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
+                      <LightbulbOff className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">The MVP is dead. The new standard is the <span className="font-bold">MPP: Minimal Perfect Product</span></p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="mt-8 text-lg font-medium text-center">Don't just launch fast — launch right.</p>
+                
+                <div className="mt-6 text-center">
+                  <Link href="/vibecheck/start">
+                    <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transition-colors">
+                      See how VibeAlong helps
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Right column - Visual */}
+              <div className="relative">
+                <div className="relative h-[400px] w-full rounded-lg overflow-hidden shadow-lg border border-gray-200">
+                  {/* Animated rocket */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                    <motion.div
+                      initial={{ y: 20 }}
+                      animate={{ y: -20 }}
+                      transition={{
+                        repeat: Number.POSITIVE_INFINITY,
+                        repeatType: "reverse",
+                        duration: 2,
+                        ease: "easeInOut"
+                      }}
+                      className="relative"
+                    >
+                      <div className="absolute -bottom-8 w-16 h-32 bg-gradient-to-t from-orange-500 to-transparent opacity-50 blur-xl rounded-full mx-auto"></div>
+                      <Rocket className="h-32 w-32 text-white" />
+                    </motion.div>
+                  </div>
+                  
+                  {/* Stats overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-white">40%</p>
+                        <p className="text-xs text-gray-300">Faster to market</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-white">60%</p>
+                        <p className="text-xs text-gray-300">Higher completion</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-white">3x</p>
+                        <p className="text-xs text-gray-300">More launches</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Code snippet */}
+                <div className="absolute -bottom-6 -right-6 w-64 h-32 bg-white rounded-lg shadow-lg border border-gray-200 p-3 rotate-6">
+                  <div className="text-xs font-mono text-gray-800 overflow-hidden h-full">
+                    <div className="text-gray-500">// AI generated in seconds</div>
+                    <div><span className="text-purple-600">function</span> <span className="text-blue-600">launchFaster</span>() {'{'}</div>
+                    <div>  <span className="text-purple-600">const</span> idea = <span className="text-green-600">"Your brilliant concept"</span>;</div>
+                    <div>  <span className="text-purple-600">const</span> vibeCode = <span className="text-blue-600">generateWithAI</span>(idea);</div>
+                    <div>  <span className="text-purple-600">const</span> prodReady = <span className="text-blue-600">vibeAlong</span>(vibeCode);</div>
+                    <div>  <span className="text-purple-600">return</span> <span className="text-blue-600">ship</span>(prodReady);</div>
+                    <div>{'}'}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

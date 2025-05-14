@@ -85,6 +85,28 @@ export function TaskSummary({ task }: TaskSummaryProps) {
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <Avatar className="h-8 w-8">
-                <AvatarImage />
-              </Avatar>\
-\
+                <AvatarImage src={task.assignee?.avatar || "/user-profile.png"} alt="Assignee" />
+              </Avatar>
+              <div>
+                <p className="text-sm font-medium">{task.assignee?.name || "Unassigned"}</p>
+                <p className="text-xs text-muted-foreground">Assignee</p>
+              </div>
+            </div>
+
+            {task.reviewer && (
+              <div className="flex items-center gap-3">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src={task.reviewer.avatar || "/user-profile.png"} alt="Reviewer" />
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium">{task.reviewer.name}</p>
+                  <p className="text-xs text-muted-foreground">Reviewer</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}

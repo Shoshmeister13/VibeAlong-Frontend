@@ -196,9 +196,11 @@ export default function V0IntegrationPage() {
                   className="p-6 border-0 shadow-lg overflow-hidden relative group animate-on-scroll"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}"></div>
+                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color}`}></div>
                   <div className="flex flex-col h-full">
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-6">
+                    <div
+                      className={`w-14 h-14 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center mb-6`}
+                    >
                       {item.icon}
                     </div>
                     <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
@@ -688,51 +690,54 @@ function HomePageContent() {
 }
 
 export default function HomePage() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const code = searchParams.get("code")
-  const { supabase } = useSupabase()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code");
+  const { supabase } = useSupabase();
 
   useEffect(() => {
     // If there's an auth code in the URL, redirect to the callback handler
     if (code) {
-      console.log("Detected auth code in root URL, redirecting to callback handler")
-      router.push(`/auth/callback?code=${code}`)
+      console.log(
+        "Detected auth code in root URL, redirecting to callback handler"
+      );
+      router.push(`/auth/callback?code=${code}`);
     }
-  }, [code, router])
+  }, [code, router]);
 
   // Only check session if explicitly requested via a query param
   useEffect(() => {
     const checkSession = async () => {
       const {
         data: { session },
-      } = await supabase.auth.getSession()
+      } = await supabase.auth.getSession();
       if (session) {
         // Check if profile is completed
         const { data: profile } = await supabase
           .from("profiles")
           .select("profile_completed, role")
           .eq("id", session.user.id)
-          .single()
+          .single();
 
         if (profile?.profile_completed) {
-          router.push("/dashboard")
+          router.push("/dashboard");
         } else {
           // Get role from profile or user metadata
-          const role = profile?.role || session.user.user_metadata.role || "developer"
+          const role =
+            profile?.role || session.user.user_metadata.role || "developer";
           // Normalize role for URL
-          const normalizedRole = role === "vibe_coder" ? "vibe-coder" : role
-          router.push(`/onboarding/${normalizedRole}`)
+          const normalizedRole = role === "vibe_coder" ? "vibe-coder" : role;
+          router.push(`/onboarding/${normalizedRole}`);
         }
       }
-    }
+    };
 
     // Only check session if there's a redirect param in the URL
-    const redirectToDashboard = searchParams.get("redirect")
+    const redirectToDashboard = searchParams.get("redirect");
     if (redirectToDashboard === "true" && !code) {
-      checkSession()
+      checkSession();
     }
-  }, [supabase, router, code, searchParams])
+  }, [supabase, router, code, searchParams]);
 
   // If there's a code, show a loading state
   if (code) {
@@ -740,9 +745,9 @@ export default function HomePage() {
       <div className="flex items-center justify-center min-h-screen">
         <p className="text-lg">Verifying your email...</p>
       </div>
-    )
+    );
   }
 
   // Otherwise, render the normal home page
-  return <HomePageContent />
+  return <HomePageContent />;
 }

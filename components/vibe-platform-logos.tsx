@@ -148,8 +148,8 @@ export const primaryVibePlatforms = [
     id: "v0",
     name: "v0",
     logo: (
-      <div className="relative h-12 w-12 sm:h-16 sm:w-16 overflow-hidden">
-        <Image src="/platform-logos/v0-logo.png" alt="v0" width={64} height={64} className="object-contain" />
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
+        <Image src="/platform-logos/v0-logo.png" alt="v0" width={32} height={32} className="object-contain" />
       </div>
     ),
   },
@@ -157,8 +157,14 @@ export const primaryVibePlatforms = [
     id: "lovable",
     name: "Lovable",
     logo: (
-      <div className="relative h-12 w-12 sm:h-16 sm:w-16 overflow-hidden rounded-lg">
-        <Image src="/platform-logos/lovable-logo.jpeg" alt="Lovable" width={64} height={64} className="object-cover" />
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
+        <Image
+          src="/platform-logos/lovable-logo.jpeg"
+          alt="Lovable"
+          width={32}
+          height={32}
+          className="object-contain"
+        />
       </div>
     ),
   },
@@ -166,8 +172,8 @@ export const primaryVibePlatforms = [
     id: "bolt",
     name: "Bolt",
     logo: (
-      <div className="relative h-12 w-12 sm:h-16 sm:w-16 overflow-hidden">
-        <Image src="/platform-logos/bolt-logo.png" alt="Bolt" width={64} height={64} className="object-contain" />
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
+        <Image src="/platform-logos/bolt-logo.png" alt="Bolt" width={32} height={32} className="object-contain" />
       </div>
     ),
   },
@@ -175,8 +181,8 @@ export const primaryVibePlatforms = [
     id: "base44",
     name: "Base44",
     logo: (
-      <div className="relative h-12 w-12 sm:h-16 sm:w-16 overflow-hidden">
-        <Image src="/platform-logos/base44-logo.png" alt="Base44" width={64} height={64} className="object-contain" />
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
+        <Image src="/platform-logos/base44-logo.png" alt="Base44" width={32} height={32} className="object-contain" />
       </div>
     ),
   },
@@ -184,8 +190,8 @@ export const primaryVibePlatforms = [
     id: "replit",
     name: "Replit",
     logo: (
-      <div className="relative h-12 w-12 sm:h-16 sm:w-16 overflow-hidden rounded-2xl">
-        <Image src="/platform-logos/replit-logo.png" alt="Replit" width={64} height={64} className="object-cover" />
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
+        <Image src="/platform-logos/replit-logo.png" alt="Replit" width={32} height={32} className="object-contain" />
       </div>
     ),
   },

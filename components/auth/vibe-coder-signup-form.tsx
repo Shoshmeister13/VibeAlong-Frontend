@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { Loader2, Code, Zap, Users } from "lucide-react"
+import { Loader2, Code, Zap, Users, Github, Mail, Info } from "lucide-react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -100,59 +100,30 @@ export function VibeCoderSignupForm() {
     }
   }
 
+  const handleGithubSignup = () => {
+    setIsLoading(true)
+    // Implement GitHub authentication
+    toast({
+      title: "GitHub Authentication",
+      description: "GitHub authentication is being set up.",
+    })
+    setIsLoading(false)
+  }
+
+  const handleGmailSignup = () => {
+    setIsLoading(true)
+    // Implement Gmail authentication
+    toast({
+      title: "Gmail Authentication",
+      description: "Gmail authentication is being set up.",
+    })
+    setIsLoading(false)
+  }
+
   return (
     <div className="flex min-h-screen">
-      {/* Side Section */}
-      <div className="hidden md:flex md:w-1/2 bg-black text-white p-8 flex-col justify-between">
-        <div>
-          <Link href="/" className="flex items-center gap-2 mb-12">
-            <Image src="/icon.png" alt="VibeAlong Logo" width={40} height={40} className="h-10 w-auto" />
-            <span className="text-xl font-bold">VibeAlong</span>
-          </Link>
-
-          <h1 className="text-4xl font-bold mb-6">Become a Vibe-Coder & start creating magic</h1>
-          <p className="text-xl mb-8">Turn your ideas into reality with our network of top-tier developers.</p>
-        </div>
-
-        <div className="space-y-6">
-          <div className="flex items-start gap-4">
-            <div className="bg-white/10 p-2 rounded-lg">
-              <Zap className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="font-medium text-lg">Rapid development</h3>
-              <p className="text-white/70">Get your projects built in record time by skilled developers.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="bg-white/10 p-2 rounded-lg">
-              <Code className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="font-medium text-lg">Quality code guaranteed</h3>
-              <p className="text-white/70">Our devs deliver clean, maintainable code that just works.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="bg-white/10 p-2 rounded-lg">
-              <Users className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="font-medium text-lg">Find your perfect match</h3>
-              <p className="text-white/70">Connect with developers who match your style and vision.</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-12">
-          <p className="text-white/50 text-sm">© 2023 VibeAlong. All rights reserved.</p>
-        </div>
-      </div>
-
-      {/* Form Section */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
+      {/* Form Section - Now on the LEFT */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 bg-white">
         <div className="w-full max-w-md">
           <div className="flex flex-col items-center space-y-2 text-center md:hidden mb-8">
             <Image src="/icon.png" alt="VibeAlong Logo" width={80} height={80} className="mb-2" />
@@ -166,6 +137,45 @@ export function VibeCoderSignupForm() {
           </div>
 
           <div className="bg-card rounded-lg border shadow-sm p-6 md:p-8">
+            <div className="flex items-center gap-2 p-3 mb-4 bg-blue-50 border border-blue-100 rounded-md">
+              <Info className="h-5 w-5 text-blue-500 flex-shrink-0" />
+              <p className="text-sm text-blue-700">
+                Using GitHub optimizes VibeAlong workflows for seamless collaboration.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 mb-6">
+              <Button
+                type="button"
+                variant="outline"
+                className="flex items-center justify-center gap-2 w-full"
+                onClick={handleGithubSignup}
+              >
+                <Github className="h-5 w-5" />
+                Sign up with GitHub
+                <span className="text-xs text-green-600 ml-1">(Recommended)</span>
+              </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                className="flex items-center justify-center gap-2 w-full"
+                onClick={handleGmailSignup}
+              >
+                <Mail className="h-5 w-5" />
+                Sign up with Gmail
+              </Button>
+
+              <div className="relative my-2">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-gray-300"></span>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white px-2 text-gray-500">Or continue with</span>
+                </div>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="fullName" className="text-sm font-medium">
@@ -227,6 +237,55 @@ export function VibeCoderSignupForm() {
               </Link>
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Side Section - Now on the RIGHT */}
+      <div className="hidden md:flex md:w-1/2 bg-black text-white p-8 flex-col justify-between">
+        <div>
+          <Link href="/" className="flex items-center gap-2 mb-12">
+            <Image src="/icon.png" alt="VibeAlong Logo" width={40} height={40} className="h-10 w-auto" />
+            <span className="text-xl font-bold">VibeAlong</span>
+          </Link>
+
+          <h1 className="text-4xl font-bold mb-6">Become a Vibe-Coder & start creating magic</h1>
+          <p className="text-xl mb-8">Turn your ideas into reality with our network of top-tier developers.</p>
+        </div>
+
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <div className="bg-white/10 p-2 rounded-lg">
+              <Zap className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h3 className="font-medium text-lg">Rapid development</h3>
+              <p className="text-white/70">Get your projects built in record time by skilled developers.</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <div className="bg-white/10 p-2 rounded-lg">
+              <Code className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h3 className="font-medium text-lg">Quality code guaranteed</h3>
+              <p className="text-white/70">Our devs deliver clean, maintainable code that just works.</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <div className="bg-white/10 p-2 rounded-lg">
+              <Users className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h3 className="font-medium text-lg">Find your perfect match</h3>
+              <p className="text-white/70">Connect with developers who match your style and vision.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <p className="text-white/50 text-sm">© 2023 VibeAlong. All rights reserved.</p>
         </div>
       </div>
     </div>
