@@ -1,6 +1,3 @@
-"use client"
-
-import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -23,32 +20,8 @@ import {
 } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useSupabase } from "@/components/providers/supabase-provider"
 
 export default function V0IntegrationPage() {
-  const [activeTab, setActiveTab] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-
-    const handleScroll = () => {
-      const elements = document.querySelectorAll(".animate-on-scroll")
-      elements.forEach((element) => {
-        const position = element.getBoundingClientRect()
-        if (position.top < window.innerHeight - 100) {
-          element.classList.add("animate-in")
-        }
-      })
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    handleScroll() // Check on initial load
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   return (
     <>
       <SiteHeader />
@@ -65,9 +38,7 @@ export default function V0IntegrationPage() {
           ></div>
 
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div
-              className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-            >
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-1000 opacity-100 translate-y-0">
               <div className="flex-1 space-y-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="bg-white/10 backdrop-blur-sm p-2 rounded-lg flex items-center gap-3">
@@ -380,9 +351,8 @@ export default function V0IntegrationPage() {
                   <button
                     key={index}
                     className={`flex-1 py-4 px-4 text-center font-medium text-sm transition-colors ${
-                      activeTab === index ? "text-black border-b-2 border-black" : "text-gray-500 hover:text-gray-700"
+                      index === 0 ? "text-black border-b-2 border-black" : "text-gray-500 hover:text-gray-700"
                     }`}
-                    onClick={() => setActiveTab(index)}
                   >
                     {tab}
                   </button>
@@ -390,143 +360,49 @@ export default function V0IntegrationPage() {
               </div>
 
               <div className="p-6">
-                {activeTab === 0 && (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[60%]">Task</TableHead>
-                        <TableHead className="w-[20%]">Complexity</TableHead>
-                        <TableHead className="text-right">Estimate</TableHead>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[60%]">Task</TableHead>
+                      <TableHead className="w-[20%]">Complexity</TableHead>
+                      <TableHead className="text-right">Estimate</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { task: "Implement responsive design", complexity: "Low", hours: 3, price: 60 },
+                      { task: "Add dark mode support", complexity: "Medium", hours: 4, price: 80 },
+                      { task: "Create animated transitions", complexity: "Medium", hours: 5, price: 100 },
+                      { task: "Build interactive components", complexity: "High", hours: 6, price: 120 },
+                      { task: "Optimize for performance", complexity: "Medium", hours: 4, price: 80 },
+                    ].map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{item.task}</TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={
+                              item.complexity === "Low"
+                                ? "outline"
+                                : item.complexity === "Medium"
+                                  ? "secondary"
+                                  : "default"
+                            }
+                          >
+                            {item.complexity}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <Clock className="h-4 w-4 text-gray-400" />
+                            <span>
+                              {item.hours} hrs — ${item.price}
+                            </span>
+                          </div>
+                        </TableCell>
                       </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        { task: "Implement responsive design", complexity: "Low", hours: 3, price: 60 },
-                        { task: "Add dark mode support", complexity: "Medium", hours: 4, price: 80 },
-                        { task: "Create animated transitions", complexity: "Medium", hours: 5, price: 100 },
-                        { task: "Build interactive components", complexity: "High", hours: 6, price: 120 },
-                        { task: "Optimize for performance", complexity: "Medium", hours: 4, price: 80 },
-                      ].map((item, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{item.task}</TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={
-                                item.complexity === "Low"
-                                  ? "outline"
-                                  : item.complexity === "Medium"
-                                    ? "secondary"
-                                    : "default"
-                              }
-                            >
-                              {item.complexity}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex items-center justify-end gap-2">
-                              <Clock className="h-4 w-4 text-gray-400" />
-                              <span>
-                                {item.hours} hrs — ${item.price}
-                              </span>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
-
-                {activeTab === 1 && (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[60%]">Task</TableHead>
-                        <TableHead className="w-[20%]">Complexity</TableHead>
-                        <TableHead className="text-right">Estimate</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        { task: "Set up user authentication", complexity: "Medium", hours: 4, price: 80 },
-                        { task: "Create REST API endpoints", complexity: "Medium", hours: 5, price: 100 },
-                        { task: "Implement data validation", complexity: "Medium", hours: 3, price: 60 },
-                        { task: "Set up database models", complexity: "High", hours: 6, price: 120 },
-                        { task: "Add user roles and permissions", complexity: "High", hours: 5, price: 100 },
-                      ].map((item, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{item.task}</TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={
-                                item.complexity === "Low"
-                                  ? "outline"
-                                  : item.complexity === "Medium"
-                                    ? "secondary"
-                                    : "default"
-                              }
-                            >
-                              {item.complexity}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex items-center justify-end gap-2">
-                              <Clock className="h-4 w-4 text-gray-400" />
-                              <span>
-                                {item.hours} hrs — ${item.price}
-                              </span>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
-
-                {activeTab === 2 && (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[60%]">Task</TableHead>
-                        <TableHead className="w-[20%]">Complexity</TableHead>
-                        <TableHead className="text-right">Estimate</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        { task: "Connect Supabase database", complexity: "Medium", hours: 4, price: 80 },
-                        { task: "Add Stripe checkout", complexity: "High", hours: 6, price: 120 },
-                        { task: "Set up email notifications", complexity: "Medium", hours: 3, price: 60 },
-                        { task: "Integrate with third-party APIs", complexity: "High", hours: 5, price: 100 },
-                        { task: "Set up file uploads to cloud storage", complexity: "Medium", hours: 4, price: 80 },
-                      ].map((item, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{item.task}</TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={
-                                item.complexity === "Low"
-                                  ? "outline"
-                                  : item.complexity === "Medium"
-                                    ? "secondary"
-                                    : "default"
-                              }
-                            >
-                              {item.complexity}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex items-center justify-end gap-2">
-                              <Clock className="h-4 w-4 text-gray-400" />
-                              <span>
-                                {item.hours} hrs — ${item.price}
-                              </span>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </div>
           </div>
@@ -683,71 +559,4 @@ export default function V0IntegrationPage() {
       <SiteFooter />
     </>
   )
-}
-
-function HomePageContent() {
-  return <V0IntegrationPage />
-}
-
-export default function HomePage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const code = searchParams.get("code");
-  const { supabase } = useSupabase();
-
-  useEffect(() => {
-    // If there's an auth code in the URL, redirect to the callback handler
-    if (code) {
-      console.log(
-        "Detected auth code in root URL, redirecting to callback handler"
-      );
-      router.push(`/auth/callback?code=${code}`);
-    }
-  }, [code, router]);
-
-  // Only check session if explicitly requested via a query param
-  useEffect(() => {
-    const checkSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session) {
-        // Check if profile is completed
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("profile_completed, role")
-          .eq("id", session.user.id)
-          .single();
-
-        if (profile?.profile_completed) {
-          router.push("/dashboard");
-        } else {
-          // Get role from profile or user metadata
-          const role =
-            profile?.role || session.user.user_metadata.role || "developer";
-          // Normalize role for URL
-          const normalizedRole = role === "vibe_coder" ? "vibe-coder" : role;
-          router.push(`/onboarding/${normalizedRole}`);
-        }
-      }
-    };
-
-    // Only check session if there's a redirect param in the URL
-    const redirectToDashboard = searchParams.get("redirect");
-    if (redirectToDashboard === "true" && !code) {
-      checkSession();
-    }
-  }, [supabase, router, code, searchParams]);
-
-  // If there's a code, show a loading state
-  if (code) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg">Verifying your email...</p>
-      </div>
-    );
-  }
-
-  // Otherwise, render the normal home page
-  return <HomePageContent />;
 }
