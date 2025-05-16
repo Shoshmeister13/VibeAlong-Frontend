@@ -189,9 +189,7 @@ export default function HomePage() {
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
               <h1 className="animate-in mb-4 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-                <span className="inline-block">Turn Your Vibe-Coding Gig</span>
-                <br />
-                <span className="inline-block">into Production Ready Software</span>
+                <span className="inline-block">Turn Your Vibe-Coding Gigs into Production-Ready Software</span>
               </h1>
               <p className="animate-in delay-100 mb-8 text-xl text-muted-foreground">
                 VibeAlong empowers AI-assisted coders with the tools and vetted experts to transform their creative
@@ -225,6 +223,160 @@ export default function HomePage() {
                       <span className="text-sm font-medium">{platform.name}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* The Rise of Vibe-Coding Section */}
+        <section className="py-20 bg-white border-t border-gray-100">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center justify-center mb-4">
+                <Zap className="h-6 w-6 text-amber-500 mr-2" />
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  The Rise of Vibe-Coding & Why Speed Matters More Than Ever
+                </h2>
+              </div>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-10 items-center">
+              <div className="w-full lg:w-3/5">
+                <div className="mb-8">
+                  <div className="inline-flex items-center rounded-full bg-pink-100 px-3 py-1 text-sm text-pink-800 mb-4">
+                    <span className="mr-1">🔮</span>
+                    <span>Building has never been easier — or more competitive.</span>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  {/* Stat 1 */}
+                  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-100 bg-white shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                      <Zap className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">
+                        Over <span className="font-bold">400,000 projects</span> launched last year using tools like v0,
+                        Replit, Supabase
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat 2 */}
+                  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-100 bg-white shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                      <Clock className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">
+                        Time-to-market expectations dropped <span className="font-bold">40%</span> since 2021
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat 3 */}
+                  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-100 bg-white shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                      <Code className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">
+                        <span className="font-bold">60%</span> of indie builds fail to ship due to unfinished backends
+                        or blocked dev work
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat 4 */}
+                  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-100 bg-white shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                      <Sparkles className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">
+                        AI can build UI fast — but real shipping still requires real dev support
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat 5 */}
+                  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-100 bg-white shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center">
+                      <BarChart className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium">
+                        The MVP is dead. The new standard is the{" "}
+                        <span className="font-bold">MPP: Minimal Perfect Product</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-10 text-center">
+                  <p className="text-xl font-medium mb-6">Don't just launch fast — launch right.</p>
+                  <Link href="#how-it-works">
+                    <Button className="px-6">
+                      See how VibeAlong helps
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="w-full lg:w-2/5">
+                <div className="relative">
+                  <div className="bg-gray-900 rounded-lg p-8 text-white relative overflow-hidden">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20">
+                      <div className="w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+                    </div>
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="text-6xl font-bold mb-2 text-white">40%</div>
+                      <div className="text-sm text-gray-300 mb-8">Faster to market</div>
+
+                      <div className="text-6xl font-bold mb-2 text-white">60%</div>
+                      <div className="text-sm text-gray-300">Higher completion rate</div>
+                    </div>
+
+                    <div className="absolute bottom-0 right-0 p-4">
+                      <div className="text-white/80">
+                        <div className="w-16 h-16">
+                          <svg
+                            viewBox="0 0 100 100"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-full h-full"
+                          >
+                            <path
+                              d="M50 10L90 30V70L50 90L10 70V30L50 10Z"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              fill="currentColor"
+                              fillOpacity="0.2"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute -top-12 -right-10 bg-white rounded-lg p-4 shadow-lg border border-gray-200 w-60 transform rotate-2 z-10">
+                    <div className="text-xs font-mono text-purple-600">
+                      <div>// AI generated in seconds</div>
+                      <div>
+                        function launch<span className="text-blue-600">()</span> {"{"}
+                      </div>
+                      <div className="pl-2">
+                        const idea = <span className="text-green-600">"Your brilliant concept"</span>;
+                      </div>
+                      <div className="pl-2">
+                        const vibeCode = generateCode<span className="text-blue-600">(idea)</span>;
+                      </div>
+                      <div>{"}"}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
