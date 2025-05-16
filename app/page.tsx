@@ -34,6 +34,12 @@ import { useSupabase } from "@/components/providers/supabase-provider"
 import { DeveloperSignupForm } from "@/components/developer-signup-form"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+// Add this near the top of the file after the imports
+// This ensures images are properly optimized and loaded
+const imageLoader = ({ src, width, quality }) => {
+  return `${process.env.NEXT_PUBLIC_SITE_URL || ""}${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function HomePage() {
   // State to control banner visibility
   const [showBanner, setShowBanner] = useState(true)
@@ -501,6 +507,7 @@ export default function HomePage() {
                               width={32}
                               height={32}
                               className="object-cover"
+                              priority
                             />
                           </div>
                           <div>
