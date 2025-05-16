@@ -3,16 +3,24 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from 'lucide-react'
-import { Users } from 'lucide-react'
-import { Sparkles } from 'lucide-react'
-import { Zap from 'lucide-react'
-import { Code from 'lucide-react'
-import { FileText from 'lucide-react'
-import { Download from 'lucide-react'
-import { BarChart } from 'lucide-react'
-import { Database from 'lucide-react'
-import { X } from 'lucide-react'
+import {
+  ArrowRight,
+  Sparkles,
+  Zap,
+  Code,
+  FileText,
+  Download,
+  BarChart,
+  Database,
+  X,
+  Clock,
+  DollarSign,
+  Terminal,
+  Check,
+  ClipboardCheck,
+  MessageSquare,
+  LayoutDashboard,
+} from "lucide-react"
 import Link from "next/link"
 import { primaryVibePlatforms } from "@/components/vibe-platform-logos"
 import Image from "next/image"
@@ -25,9 +33,6 @@ import { useSearchParams } from "next/navigation"
 import { useSupabase } from "@/components/providers/supabase-provider"
 import { DeveloperSignupForm } from "@/components/developer-signup-form"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Clock, DollarSign, Terminal } from 'lucide-react'
-import { Check } from 'lucide-react'
-import { ClipboardCheck, MessageSquare, LayoutDashboard } from 'lucide-react'
 
 export default function HomePage() {
   // State to control banner visibility
@@ -178,9 +183,9 @@ export default function HomePage() {
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
               <h1 className="animate-in mb-4 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-                Turn Your Vibe-Coding Gig
+                <span className="inline-block">Turn Your Vibe-Coding Gig</span>
                 <br />
-                into Production Ready Software
+                <span className="inline-block">into Production Ready Software</span>
               </h1>
               <p className="animate-in delay-100 mb-8 text-xl text-muted-foreground">
                 VibeAlong empowers AI-assisted coders with the tools and vetted experts to transform their creative
@@ -228,8 +233,8 @@ export default function HomePage() {
                 Say Hello to Your Vibe Coding HQ 👋
               </h2>
               <p className="mt-4 text-xl text-white/70 leading-relaxed">
-                VibeAlong is the AI-centric platform that empowers today's and tomorrow's AI-assisted coders. We provide
-                a central command center to manage, hire, and accelerate your development tasks.
+                VibeAlong is the AI-centric platform that empowers today&apos;s and tomorrow&apos;s AI-assisted coders.
+                We provide a central command center to manage, hire, and accelerate your development tasks.
               </p>
             </div>
 
@@ -250,7 +255,7 @@ export default function HomePage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-white/90">Configure your project settings</span>
+                    <span className="text-white/90">Configure your project settings</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
@@ -319,7 +324,11 @@ export default function HomePage() {
         <section className="py-28 section-accent">
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">Vibe Coding? You Should Probably<br />Get a VibeCheck 🩺</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+                Vibe Coding? You Should Probably
+                <br />
+                Get a VibeCheck 🩺
+              </h2>
               <p className="text-xl leading-relaxed mb-8">
                 It all starts with a clear overview of your project. Our VibeCheck provides a comprehensive analysis of
                 your codebase, architecture, and development needs to identify opportunities and potential challenges
@@ -332,7 +341,8 @@ export default function HomePage() {
                     <FileText className="h-10 w-10 text-primary mb-4" />
                     <h3 className="text-lg font-semibold mb-2">Project Analysis</h3>
                     <p className="text-sm text-center">
-                      Get a detailed breakdown of your project's structure, dependencies, and technical requirements
+                      Get a detailed breakdown of your project&apos;s structure, dependencies, and technical
+                      requirements
                     </p>
                   </div>
                   <div className="flex flex-col items-center p-6 rounded-lg bg-white/5 backdrop-blur-sm w-full md:w-1/3">
@@ -401,7 +411,7 @@ export default function HomePage() {
                       <div>
                         <h3 className="font-medium mb-1">Project Overview</h3>
                         <p className="text-sm text-muted-foreground">
-                          Get a comprehensive analysis of your project's scope, challenges, and opportunities.
+                          Get a comprehensive analysis of your project&apos;s scope, challenges, and opportunities.
                         </p>
                       </div>
                     </div>
@@ -502,8 +512,9 @@ export default function HomePage() {
                         </div>
                         <div className="bg-blue-50 rounded-lg p-3 mb-3">
                           <p className="text-sm">
-                            "Based on your project description, I recommend a React frontend with a Node.js backend.
-                            Let's discuss your specific requirements and create a roadmap for your development journey."
+                            &quot;Based on your project description, I recommend a React frontend with a Node.js
+                            backend. Let&apos;s discuss your specific requirements and create a roadmap for your
+                            development journey.&quot;
                           </p>
                         </div>
                         <div className="flex justify-between items-center">
@@ -596,9 +607,9 @@ export default function HomePage() {
                 <div className="mt-8 rounded-lg bg-muted p-4">
                   <h4 className="font-medium mb-2">Developer Testimonial</h4>
                   <blockquote className="text-sm italic text-muted-foreground">
-                    "VibeAlong has been a game-changer for my freelance career. I can pick up tasks when I have free
-                    time, and the pay is competitive. The platform makes it easy to collaborate with vibe-coders and
-                    deliver high-quality solutions."
+                    &quot;VibeAlong has been a game-changer for my freelance career. I can pick up tasks when I have
+                    free time, and the pay is competitive. The platform makes it easy to collaborate with vibe-coders
+                    and deliver high-quality solutions.&quot;
                   </blockquote>
                   <div className="mt-3 flex items-center gap-2">
                     <Avatar className="h-8 w-8">
