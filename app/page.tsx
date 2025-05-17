@@ -362,7 +362,7 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="absolute -top-12 -right-10 bg-white rounded-lg p-4 shadow-lg border border-gray-200 w-60 transform rotate-2 z-10">
+                  <div className="absolute top-1/2 -right-48 bg-white rounded-lg p-4 shadow-lg border border-gray-200 w-60 transform -translate-y-1/2 rotate-2 z-10">
                     <div className="text-xs font-mono text-purple-600">
                       <div>// AI generated in seconds</div>
                       <div>
