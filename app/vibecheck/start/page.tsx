@@ -417,184 +417,26 @@ export default function VibeCheckStart() {
         <AnimatePresence mode="wait">
           {step === -1 && (
             <div className="w-full max-w-6xl mx-auto">
-              <div className="flex flex-col lg:flex-row gap-8">
-                {/* Signup Form */}
-                <motion.div
-                  key="signup-step"
-                  className="w-full lg:w-1/2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Card className="p-8 shadow-md rounded-xl border border-gray-200 h-full">
-                    <div className="text-center mb-6">
-                      <h1 className="text-2xl font-bold mb-4">Join VibeAlong as a Vibe-Coder</h1>
-                      <p className="text-gray-600">
-                        Create your account to get started with VibeCheck and connect with top developers.
+              <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
+                <div className="flex flex-col items-center">
+                  {/* Why Get a Vibe Check Section - Now First */}
+                  <motion.div
+                    key="why-vibecheck"
+                    className="w-full max-w-3xl mb-10"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="text-center mb-8">
+                      <h2 className="text-4xl font-bold mb-4">Why Get a Vibe Check?</h2>
+                      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Transform your vibe-coded project into production-ready software with expert insights and
+                        support.
                       </p>
                     </div>
 
-                    <div className="space-y-4 mb-6">
-                      <Button
-                        onClick={handleGithubSignup}
-                        className="w-full flex items-center justify-center gap-2 bg-[#24292e] hover:bg-[#1b1f23] text-white py-2 h-10"
-                        disabled={isLoading}
-                      >
-                        <Github className="h-4 w-4" />
-                        <span>Sign up with GitHub</span>
-                        <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded ml-1">Recommended</span>
-                      </Button>
-
-                      <Button
-                        onClick={handleGmailSignup}
-                        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 py-2 h-10"
-                        disabled={isLoading}
-                      >
-                        <Mail className="h-4 w-4 text-red-500" />
-                        <span>Sign up with Gmail</span>
-                      </Button>
-
-                      <div className="relative my-6">
-                        <div className="absolute inset-0 flex items-center">
-                          <span className="w-full border-t border-gray-300"></span>
-                        </div>
-                        <div className="relative flex justify-center text-xs uppercase">
-                          <span className="bg-white px-2 text-gray-500">Or continue with email</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor="fullName" className="text-sm font-medium">
-                          Full Name
-                        </Label>
-                        <Input
-                          id="fullName"
-                          placeholder="John Doe"
-                          value={signupData.fullName}
-                          onChange={(e) => handleSignupInputChange("fullName", e.target.value)}
-                          className={`mt-1 ${signupErrors.fullName ? "border-red-500" : ""}`}
-                        />
-                        {signupErrors.fullName && <p className="text-red-500 text-sm mt-1">{signupErrors.fullName}</p>}
-                      </div>
-
-                      <div>
-                        <Label htmlFor="email" className="text-sm font-medium">
-                          Email
-                        </Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="john@example.com"
-                          value={signupData.email}
-                          onChange={(e) => handleSignupInputChange("email", e.target.value)}
-                          className={`mt-1 ${signupErrors.email ? "border-red-500" : ""}`}
-                        />
-                        {signupErrors.email && <p className="text-red-500 text-sm mt-1">{signupErrors.email}</p>}
-                      </div>
-
-                      <div>
-                        <Label htmlFor="password" className="text-sm font-medium">
-                          Password
-                        </Label>
-                        <div className="relative mt-1">
-                          <Input
-                            id="password"
-                            type={showPassword ? "text" : "password"}
-                            placeholder="••••••••"
-                            value={signupData.password}
-                            onChange={(e) => handleSignupInputChange("password", e.target.value)}
-                            className={signupErrors.password ? "border-red-500 pr-10" : "pr-10"}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                          >
-                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                          </button>
-                        </div>
-                        {signupErrors.password && <p className="text-red-500 text-sm mt-1">{signupErrors.password}</p>}
-                      </div>
-
-                      <div>
-                        <Label htmlFor="confirmPassword" className="text-sm font-medium">
-                          Confirm Password
-                        </Label>
-                        <Input
-                          id="confirmPassword"
-                          type="password"
-                          placeholder="••••••••"
-                          value={signupData.confirmPassword}
-                          onChange={(e) => handleSignupInputChange("confirmPassword", e.target.value)}
-                          className={`mt-1 ${signupErrors.confirmPassword ? "border-red-500" : ""}`}
-                        />
-                        {signupErrors.confirmPassword && (
-                          <p className="text-red-500 text-sm mt-1">{signupErrors.confirmPassword}</p>
-                        )}
-                      </div>
-
-                      <div className="flex items-start space-x-2 mt-4">
-                        <Checkbox
-                          id="terms"
-                          checked={signupData.agreeTerms}
-                          onCheckedChange={(checked) => handleSignupInputChange("agreeTerms", checked)}
-                        />
-                        <div className="grid gap-1.5 leading-none">
-                          <label
-                            htmlFor="terms"
-                            className={`text-sm font-medium leading-none ${
-                              signupErrors.agreeTerms ? "text-red-500" : "text-gray-900"
-                            }`}
-                          >
-                            I agree to the Terms of Service and Privacy Policy
-                          </label>
-                          {signupErrors.agreeTerms && <p className="text-red-500 text-sm">{signupErrors.agreeTerms}</p>}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-6">
-                      <Button
-                        onClick={handleSignupSubmit}
-                        className="w-full bg-black hover:bg-gray-800 text-white py-2 h-10"
-                        disabled={isLoading}
-                      >
-                        {isLoading ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Creating Account...
-                          </>
-                        ) : (
-                          "Create Account & Continue"
-                        )}
-                      </Button>
-                    </div>
-
-                    <p className="text-center text-sm text-gray-500 mt-6">
-                      Already have an account?{" "}
-                      <a href="/auth/login" className="text-black font-medium hover:underline">
-                        Sign in
-                      </a>
-                    </p>
-                  </Card>
-                </motion.div>
-
-                {/* Why Get a Vibe Check Section */}
-                <motion.div
-                  key="why-vibecheck"
-                  className="w-full lg:w-1/2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="h-full flex flex-col">
-                    <h2 className="text-3xl font-bold mb-6 text-center">Why Get a Vibe Check?</h2>
-
-                    <div className="grid grid-cols-1 gap-6 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                         <div className="flex items-start mb-4">
                           <div className="bg-black rounded-full p-2 mr-4 flex-shrink-0">
@@ -635,7 +477,7 @@ export default function VibeCheckStart() {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 shadow-sm mt-auto">
+                    <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 shadow-sm mb-8">
                       <div className="flex items-start">
                         <div className="text-4xl text-black opacity-50 mr-4 font-serif leading-none">"</div>
                         <div>
@@ -648,8 +490,178 @@ export default function VibeCheckStart() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+
+                  {/* Signup Form - Now Second */}
+                  <motion.div
+                    key="signup-step"
+                    className="w-full max-w-md"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Card className="p-8 shadow-md rounded-xl border border-gray-200">
+                      <div className="text-center mb-6">
+                        <h1 className="text-2xl font-bold mb-4">Join VibeAlong as a Vibe-Coder</h1>
+                        <p className="text-gray-600">
+                          Create your account to get started with VibeCheck and connect with top developers.
+                        </p>
+                      </div>
+
+                      <div className="space-y-4 mb-6">
+                        <Button
+                          onClick={handleGithubSignup}
+                          className="w-full flex items-center justify-center gap-2 bg-[#24292e] hover:bg-[#1b1f23] text-white py-2 h-10"
+                          disabled={isLoading}
+                        >
+                          <Github className="h-4 w-4" />
+                          <span>Sign up with GitHub</span>
+                          <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded ml-1">Recommended</span>
+                        </Button>
+
+                        <Button
+                          onClick={handleGmailSignup}
+                          className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 py-2 h-10"
+                          disabled={isLoading}
+                        >
+                          <Mail className="h-4 w-4 text-red-500" />
+                          <span>Sign up with Gmail</span>
+                        </Button>
+
+                        <div className="relative my-6">
+                          <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t border-gray-300"></span>
+                          </div>
+                          <div className="relative flex justify-center text-xs uppercase">
+                            <span className="bg-white px-2 text-gray-500">Or continue with email</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div>
+                          <Label htmlFor="fullName" className="text-sm font-medium">
+                            Full Name
+                          </Label>
+                          <Input
+                            id="fullName"
+                            placeholder="John Doe"
+                            value={signupData.fullName}
+                            onChange={(e) => handleSignupInputChange("fullName", e.target.value)}
+                            className={`mt-1 ${signupErrors.fullName ? "border-red-500" : ""}`}
+                          />
+                          {signupErrors.fullName && (
+                            <p className="text-red-500 text-sm mt-1">{signupErrors.fullName}</p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="email" className="text-sm font-medium">
+                            Email
+                          </Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="john@example.com"
+                            value={signupData.email}
+                            onChange={(e) => handleSignupInputChange("email", e.target.value)}
+                            className={`mt-1 ${signupErrors.email ? "border-red-500" : ""}`}
+                          />
+                          {signupErrors.email && <p className="text-red-500 text-sm mt-1">{signupErrors.email}</p>}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="password" className="text-sm font-medium">
+                            Password
+                          </Label>
+                          <div className="relative mt-1">
+                            <Input
+                              id="password"
+                              type={showPassword ? "text" : "password"}
+                              placeholder="••••••••"
+                              value={signupData.password}
+                              onChange={(e) => handleSignupInputChange("password", e.target.value)}
+                              className={signupErrors.password ? "border-red-500 pr-10" : "pr-10"}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            >
+                              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            </button>
+                          </div>
+                          {signupErrors.password && (
+                            <p className="text-red-500 text-sm mt-1">{signupErrors.password}</p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="confirmPassword" className="text-sm font-medium">
+                            Confirm Password
+                          </Label>
+                          <Input
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="••••••••"
+                            value={signupData.confirmPassword}
+                            onChange={(e) => handleSignupInputChange("confirmPassword", e.target.value)}
+                            className={`mt-1 ${signupErrors.confirmPassword ? "border-red-500" : ""}`}
+                          />
+                          {signupErrors.confirmPassword && (
+                            <p className="text-red-500 text-sm mt-1">{signupErrors.confirmPassword}</p>
+                          )}
+                        </div>
+
+                        <div className="flex items-start space-x-2 mt-4">
+                          <Checkbox
+                            id="terms"
+                            checked={signupData.agreeTerms}
+                            onCheckedChange={(checked) => handleSignupInputChange("agreeTerms", checked)}
+                          />
+                          <div className="grid gap-1.5 leading-none">
+                            <label
+                              htmlFor="terms"
+                              className={`text-sm font-medium leading-none ${
+                                signupErrors.agreeTerms ? "text-red-500" : "text-gray-900"
+                              }`}
+                            >
+                              I agree to the Terms of Service and Privacy Policy
+                            </label>
+                            {signupErrors.agreeTerms && (
+                              <p className="text-red-500 text-sm">{signupErrors.agreeTerms}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-6">
+                        <Button
+                          onClick={handleSignupSubmit}
+                          className="w-full bg-black hover:bg-gray-800 text-white py-2 h-10"
+                          disabled={isLoading}
+                        >
+                          {isLoading ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Creating Account...
+                            </>
+                          ) : (
+                            "Create Account & Continue"
+                          )}
+                        </Button>
+                      </div>
+
+                      <p className="text-center text-sm text-gray-500 mt-6">
+                        Already have an account?{" "}
+                        <a href="/auth/login" className="text-black font-medium hover:underline">
+                          Sign in
+                        </a>
+                      </p>
+                    </Card>
+                  </motion.div>
+                </div>
               </div>
             </div>
           )}

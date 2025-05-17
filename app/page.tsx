@@ -188,7 +188,7 @@ export default function HomePage() {
           <div className="absolute inset-0 -z-10 noise-bg opacity-5"></div>
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <h1 className="animate-in mb-4 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
+              <h1 className="animate-in mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
                 <span className="inline-block">Turn Your Vibe-Coding Gigs into Production-Ready Software</span>
               </h1>
               <p className="animate-in delay-100 mb-8 text-xl text-muted-foreground">
