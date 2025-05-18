@@ -20,17 +20,13 @@ export function HomeMobileNav() {
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="pr-0">
-        <MobileLink href="/" className="flex items-center">
-          <span className="font-bold">VibeAlong</span>
-        </MobileLink>
-        <div className="flex flex-col space-y-3 mt-4">
-          <MobileLink href="/for-developers">For Developers</MobileLink>
-          <MobileLink href="/vibe-coders">For Vibe-Coders</MobileLink>
-          <MobileLink href="/vibecheck/start">Start VibeCheck</MobileLink>
-          <MobileLink href="/vibe-coder-signup">Sign-up as a Vibe Coder</MobileLink>
-          <MobileLink href="/#developer-application" className="font-bold text-primary">
-            Apply as a Vibe Expert
-          </MobileLink>
+        <div className="flex flex-col space-y-4 mt-6">
+          <Button asChild className="w-full bg-primary hover:bg-primary/90">
+            <Link href="/#developer-application">Apply as a Vibe Expert</Link>
+          </Button>
+          <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
+            <Link href="/vibe-coder-signup">Join as a Vibe Coder</Link>
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
