@@ -5,7 +5,7 @@ import { UserNav } from "@/components/dashboard/user-nav"
 import { MobileNav } from "@/components/dashboard/mobile-nav"
 import { NotificationsDropdown } from "@/components/dashboard/notifications-dropdown"
 import { AiSuggestionsDropdown } from "@/components/dashboard/ai-suggestions-dropdown"
-import { HelpCircle, Sparkles, CheckCircle } from "lucide-react"
+import { HelpCircle, Sparkles, CheckCircle, Github, Terminal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Suspense } from "react"
@@ -18,7 +18,7 @@ export default function VibeCoderDashboardLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 border-b bg-background shadow-sm">
-        <div className="container max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px:8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               {/* Hamburger menu - only visible on mobile */}
@@ -104,7 +104,38 @@ export default function VibeCoderDashboardLayout({
               </div>
             </aside>
             <main className="flex-1 py-6 md:pl-6">
-              <h1 className="text-3xl font-bold tracking-tight mb-4">E-commerce Platform</h1>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <h1 className="text-3xl font-bold tracking-tight">E-commerce Platform</h1>
+                  <div className="flex items-center gap-2">
+                    <div className="relative h-6 w-6 flex-shrink-0 bg-gray-100 rounded-sm flex items-center justify-center">
+                      {/* Try to load the image, fall back to a Terminal icon */}
+                      <Image
+                        src="/platform-logos/v0-logo.png"
+                        alt="v0"
+                        width={24}
+                        height={24}
+                        className="object-contain rounded-sm"
+                        onError={(e) => {
+                          // If image fails to load, hide it and the fallback icon will show
+                          e.currentTarget.style.display = "none"
+                        }}
+                      />
+                      {/* Fallback icon that shows if image fails to load */}
+                      <Terminal className="h-4 w-4 absolute opacity-50" />
+                    </div>
+                    <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full text-xs">
+                      <Github className="h-3.5 w-3.5" />
+                      <span className="font-medium">username/ecommerce-platform</span>
+                    </div>
+                  </div>
+                </div>
+                <Link href="/create-project">
+                  <Button variant="outline" size="sm" className="gap-1">
+                    <span>Edit Project</span>
+                  </Button>
+                </Link>
+              </div>
               <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
             </main>
           </div>

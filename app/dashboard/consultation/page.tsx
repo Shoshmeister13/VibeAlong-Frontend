@@ -2,8 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -13,20 +12,17 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ConsultationChat } from "@/components/consultation/consultation-chat"
 import {
   ArrowRight,
   Calendar,
   ChevronRight,
-  Clock,
   Code,
   Download,
   FileText,
   LayoutDashboard,
   Lightbulb,
   Plus,
-  Sparkles,
   Zap,
   FileCode,
   BarChart,
@@ -54,8 +50,8 @@ type Deliverable = {
   url?: string
 }
 
-export default function ConsultationPage() {
-  const [view, setView] = useState<"landing" | "threads" | "chat">("landing")
+export default function DashboardConsultationPage() {
+  const [view, setView] = useState<"threads" | "chat">("threads")
   const [activeThread, setActiveThread] = useState<ConsultationThread | null>(null)
   const [formData, setFormData] = useState({
     projectTitle: "",
@@ -162,163 +158,31 @@ export default function ConsultationPage() {
     }
   }
 
-  // Effect to check if there are threads and set the view accordingly
-  useEffect(() => {
-    if (consultationThreads.length > 0 && view === "landing") {
-      setView("threads")
-    }
-  }, [])
-
-  // Landing page view
-  if (view === "landing") {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950">
-        <div className="container mx-auto py-12 px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <Badge
-                variant="outline"
-                className="px-3 py-1 bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800"
-              >
-                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                Free AI-Enhanced Consultation
-              </Badge>
-
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-                Jump on a Free Consultation Chat with One of Our Vetted VibeAlong Experts!
-              </h1>
-
-              <p className="text-xl text-muted-foreground">
-                Get instant guidance on your project from our AI-enhanced experts. No commitment required - just
-                valuable insights to help you move forward.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
-                    <FileText className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Project Overview</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Get a comprehensive analysis of your project's scope, challenges, and opportunities.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center">
-                    <BarChart className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Product Planning</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Receive a suggested roadmap with milestones and development priorities.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center">
-                    <Layers className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Tech Stack Recommendations</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Get expert suggestions on the best technologies for your specific project needs.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                    <FileDown className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Exportable Results</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Export your consultation as a PDF or access it anytime in your project dashboard.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <Button size="lg" className="mt-4" onClick={() => setView("threads")}>
-                Start Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-
-            <div className="relative">
-              <div className="rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-C7MM4XS3eedLIbJlNgXAPZVWDLg7VM.png"
-                  alt="VibeAlong Experts"
-                  width={600}
-                  height={400}
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="absolute bottom-6 left-6 right-6 bg-white dark:bg-gray-900 rounded-lg p-4 shadow-lg">
-                <div className="flex items-start gap-3">
-                  <Avatar className="h-10 w-10 border-2 border-primary">
-                    <AvatarImage src="/vibealong-expert.png" alt="VibeAlong Expert" />
-                    <AvatarFallback>VE</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <div className="flex items-center">
-                      <span className="font-medium">VibeAlong Expert</span>
-                      <Badge variant="outline" className="ml-2 bg-blue-500 text-white border-0 text-xs">
-                        AI-Enhanced
-                      </Badge>
-                    </div>
-                    <p className="text-sm mt-1">
-                      "Based on your project description, I recommend a React frontend with a Node.js backend. Let's
-                      discuss your specific requirements and create a roadmap for your development journey."
-                    </p>
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center text-xs text-muted-foreground">
-                        <Clock className="h-3 w-3 mr-1" />
-                        <span>Available 24/7</span>
-                        <span className="mx-2">•</span>
-                        <span>Free consultation</span>
-                      </div>
-                      <Button size="sm" variant="ghost" className="text-blue-600 dark:text-blue-400">
-                        Start chatting <ChevronRight className="h-3 w-3 ml-1" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   // Threads view
   if (view === "threads") {
     return (
-      <div className="container mx-auto py-8 px-4">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Your Consultations</h1>
-          <Button onClick={() => setView("landing")}>
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold">Expert Consultations</h1>
+            <p className="text-muted-foreground mt-1">Get personalized guidance from our AI-enhanced experts</p>
+          </div>
+          <Button>
             <Plus className="h-4 w-4 mr-2" />
             New Consultation
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left sidebar - Consultation threads */}
           <div className="lg:col-span-1">
             <Card>
-              <CardHeader>
-                <CardTitle>Consultation Threads</CardTitle>
-                <CardDescription>Your ongoing and past consultations</CardDescription>
+              <CardHeader className="pb-3">
+                <CardTitle>Your Consultations</CardTitle>
+                <CardDescription>Ongoing and past consultation threads</CardDescription>
               </CardHeader>
               <CardContent className="p-0">
-                <ScrollArea className="h-[600px]">
+                <ScrollArea className="h-[500px]">
                   {consultationThreads.length > 0 ? (
                     <div className="divide-y">
                       {consultationThreads.map((thread) => (
@@ -353,10 +217,54 @@ export default function ConsultationPage() {
                   ) : (
                     <div className="p-8 text-center">
                       <p className="text-muted-foreground mb-4">No consultations yet</p>
-                      <Button onClick={() => setView("landing")}>Start your first consultation</Button>
+                      <Button>Start your first consultation</Button>
                     </div>
                   )}
                 </ScrollArea>
+              </CardContent>
+            </Card>
+
+            {/* Benefits card */}
+            <Card className="mt-6">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">Why Get a Consultation?</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
+                    <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-sm">Project Analysis</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Get a comprehensive analysis of your project's scope and challenges
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center">
+                    <BarChart className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-sm">Development Roadmap</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Receive a suggested roadmap with milestones and priorities
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center">
+                    <Layers className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-sm">Tech Recommendations</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Get expert suggestions on the best technologies for your needs
+                    </p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -496,7 +404,7 @@ export default function ConsultationPage() {
   // Chat view
   if (view === "chat" && activeThread) {
     return (
-      <div className="container mx-auto py-8 px-4">
+      <div>
         <div className="mb-4">
           <Button variant="ghost" onClick={() => setView("threads")} className="mb-4">
             <ChevronRight className="h-4 w-4 mr-2 rotate-180" />

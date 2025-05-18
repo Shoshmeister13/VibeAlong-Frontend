@@ -253,8 +253,8 @@ export default function CreateProject() {
   }
 
   return (
-    <div className="container max-w-3xl py-10">
-      <div className="mb-8 text-center">
+    <div className="container max-w-3xl py-10 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mb-8 text-center mx-auto">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Let's Set Up Your Project</h1>
         <p className="text-muted-foreground">This helps us understand what kind of help you need.</p>
       </div>

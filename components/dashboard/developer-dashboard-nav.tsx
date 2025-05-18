@@ -15,6 +15,7 @@ import {
   PlusCircle,
   DollarSign,
   GraduationCap,
+  Github,
 } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
@@ -26,6 +27,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import Image from "next/image"
+
+// Platform icons mapping
+const platformIcons = {
+  v0: "/platform-logos/v0-logo.png",
+  replit: "/platform-logos/replit-logo.png",
+  cursor: "/platform-logos/cursor-logo.png",
+  lovable: "/platform-logos/lovable-logo.jpeg",
+  windsurf: "/platform-logos/windsurf-logo.png",
+  base44: "/platform-logos/base44-logo.png",
+  bolt: "/platform-logos/bolt-logo.png",
+}
 
 // Project selector component for developers
 function DeveloperProjectSelector() {
@@ -43,6 +56,8 @@ function DeveloperProjectSelector() {
       setSelectedProject({
         id: "project-1",
         project_name: "E-commerce Platform",
+        platform: "v0",
+        hasGithub: true,
       })
     }
   }, [])
@@ -52,10 +67,14 @@ function DeveloperProjectSelector() {
     {
       id: "project-1",
       project_name: "E-commerce Platform",
+      platform: "v0",
+      hasGithub: true,
     },
     {
       id: "project-2",
       project_name: "Mobile Banking App",
+      platform: "replit",
+      hasGithub: false,
     },
   ]
 
@@ -101,7 +120,35 @@ function DeveloperProjectSelector() {
               >
                 <div className="flex items-center gap-2 truncate">
                   <FolderKanban className="h-4 w-4 flex-shrink-0 text-primary" />
+
+                  {/* Platform Icon */}
+                  {selectedProject?.platform && (
+                    <div className="relative h-5 w-5 flex-shrink-0">
+                      <Image
+                        src={platformIcons[selectedProject.platform] || "/placeholder.svg"}
+                        alt={selectedProject.platform}
+                        width={20}
+                        height={20}
+                        className="object-contain rounded-sm"
+                      />
+                    </div>
+                  )}
+
                   <span className="truncate font-medium">{selectedProject?.project_name || "Select Project"}</span>
+
+                  {/* GitHub Indicator */}
+                  {selectedProject?.hasGithub && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex-shrink-0">
+                          <Github className="h-3.5 w-3.5 text-gray-500" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="text-xs">GitHub Connected</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
                 </div>
                 <ChevronDown className="h-4 w-4 opacity-50 flex-shrink-0 ml-2" />
               </Button>
@@ -121,7 +168,29 @@ function DeveloperProjectSelector() {
               onClick={() => handleProjectChange(project)}
               className={`cursor-pointer truncate ${selectedProject?.id === project.id ? "bg-muted/50" : ""}`}
             >
-              {project.project_name}
+              <div className="flex items-center gap-2 w-full">
+                {/* Platform Icon */}
+                {project.platform && (
+                  <div className="relative h-4 w-4 flex-shrink-0">
+                    <Image
+                      src={platformIcons[project.platform] || "/placeholder.svg"}
+                      alt={project.platform}
+                      width={16}
+                      height={16}
+                      className="object-contain rounded-sm"
+                    />
+                  </div>
+                )}
+
+                <span className="truncate">{project.project_name}</span>
+
+                {/* GitHub Indicator */}
+                {project.hasGithub && (
+                  <div className="ml-auto flex-shrink-0">
+                    <Github className="h-3 w-3 text-gray-500" />
+                  </div>
+                )}
+              </div>
             </DropdownMenuItem>
           ))}
           <DropdownMenuSeparator />
