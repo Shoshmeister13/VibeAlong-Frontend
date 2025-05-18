@@ -20,7 +20,6 @@ import {
   EyeOff,
   Plus,
   CheckCircle2,
-  Terminal,
 } from "lucide-react"
 import { primaryVibePlatforms } from "@/components/vibe-platform-logos"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -722,14 +721,29 @@ export default function VibeCheckStart() {
                     {primaryVibePlatforms.slice(0, 4).map((platform) => (
                       <div
                         key={platform.id}
-                        className="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center"
+                        className="bg-gray-50 p-3 rounded-lg border border-gray-100 hover:border-gray-300 transition-all flex items-center"
                       >
-                        <Terminal className="h-5 w-5 mr-2 text-gray-700" />
+                        <div className="w-8 h-8 flex items-center justify-center bg-white rounded-md border border-gray-200 mr-3 flex-shrink-0 overflow-hidden">
+                          <img
+                            src={
+                              platform.id === "lovable"
+                                ? "/platform-logos/lovable-logo.jpeg"
+                                : `/platform-logos/${platform.id}-logo.png`
+                            }
+                            alt={`${platform.name} logo`}
+                            className="w-5 h-5 object-contain"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement
+                              target.src = "/placeholder-4m6jx.png"
+                              target.onerror = null
+                            }}
+                          />
+                        </div>
                         <span className="font-medium">{platform.name}</span>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="ml-auto text-xs"
+                          className="ml-auto text-xs hover:bg-black hover:text-white"
                           onClick={
                             platform.id === "v0"
                               ? openV0GithubDocs
@@ -777,69 +791,80 @@ export default function VibeCheckStart() {
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-xl font-bold mb-2">🛠️ Which platform are you using?</h2>
-                <p className="text-gray-600 mb-4">Select your development platform</p>
+                <div className="text-center mb-4">
+                  <h1 className="text-2xl font-bold mb-2">🛠️ Which platform are you using?</h1>
+                  <p className="text-gray-600">Select your development platform</p>
+                </div>
 
-                <div className="mb-8">
-                  <RadioGroup value={selectedPlatform} onValueChange={handlePlatformSelect} className="space-y-4">
-                    {primaryVibePlatforms.map((platform) => (
-                      <div
-                        key={platform.id}
-                        className={`flex items-center space-x-3 rounded-lg border p-4 cursor-pointer transition-all ${
-                          selectedPlatform === platform.id
-                            ? "border-black bg-black/5"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                        onClick={() => handlePlatformSelect(platform.id)}
-                      >
-                        <RadioGroupItem value={platform.id} id={platform.id} className="sr-only" />
-                        <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-50 rounded-md">
-                          <Terminal className="h-5 w-5 text-gray-700" />
-                        </div>
-                        <Label
-                          htmlFor={platform.id}
-                          className={`flex-grow font-medium text-base cursor-pointer ${
-                            selectedPlatform === platform.id ? "text-black" : "text-gray-700"
-                          }`}
-                        >
-                          {platform.name}
-                        </Label>
-                      </div>
-                    ))}
-
+                <RadioGroup value={selectedPlatform} onValueChange={handlePlatformSelect} className="space-y-4">
+                  {primaryVibePlatforms.map((platform) => (
                     <div
+                      key={platform.id}
                       className={`flex items-center space-x-3 rounded-lg border p-4 cursor-pointer transition-all ${
-                        selectedPlatform === "other"
+                        selectedPlatform === platform.id
                           ? "border-black bg-black/5"
                           : "border-gray-200 hover:border-gray-300"
                       }`}
-                      onClick={() => handlePlatformSelect("other")}
+                      onClick={() => handlePlatformSelect(platform.id)}
                     >
-                      <RadioGroupItem value="other" id="other" className="sr-only" />
-                      <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
-                        <span className="text-xl">🔧</span>
+                      <RadioGroupItem value={platform.id} id={platform.id} className="sr-only" />
+                      <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white rounded-md border border-gray-200 overflow-hidden">
+                        <img
+                          src={
+                            platform.id === "lovable"
+                              ? "/platform-logos/lovable-logo.jpeg"
+                              : `/platform-logos/${platform.id}-logo.png`
+                          }
+                          alt={`${platform.name} logo`}
+                          className="w-6 h-6 object-contain"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = "/placeholder-4m6jx.png"
+                            target.onerror = null
+                          }}
+                        />
                       </div>
-                      <div className="flex-grow">
-                        <Label
-                          htmlFor="other"
-                          className={`font-medium text-base cursor-pointer ${
-                            selectedPlatform === "other" ? "text-black" : "text-gray-700"
-                          }`}
-                        >
-                          Other
-                        </Label>
-                        {selectedPlatform === "other" && (
-                          <Input
-                            value={otherPlatform}
-                            onChange={handleOtherPlatformChange}
-                            placeholder="Enter platform name..."
-                            className="mt-2"
-                          />
-                        )}
-                      </div>
+                      <Label
+                        htmlFor={platform.id}
+                        className={`flex-grow font-medium text-base cursor-pointer ${
+                          selectedPlatform === platform.id ? "text-black" : "text-gray-700"
+                        }`}
+                      >
+                        {platform.name}
+                      </Label>
                     </div>
-                  </RadioGroup>
-                </div>
+                  ))}
+
+                  <div
+                    className={`flex items-center space-x-3 rounded-lg border p-4 cursor-pointer transition-all ${
+                      selectedPlatform === "other" ? "border-black bg-black/5" : "border-gray-200 hover:border-gray-300"
+                    }`}
+                    onClick={() => handlePlatformSelect("other")}
+                  >
+                    <RadioGroupItem value="other" id="other" className="sr-only" />
+                    <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white rounded-md border border-gray-200">
+                      <span className="text-xl">🔧</span>
+                    </div>
+                    <div className="flex-grow">
+                      <Label
+                        htmlFor="other"
+                        className={`font-medium text-base cursor-pointer ${
+                          selectedPlatform === "other" ? "text-black" : "text-gray-700"
+                        }`}
+                      >
+                        Other
+                      </Label>
+                      {selectedPlatform === "other" && (
+                        <Input
+                          value={otherPlatform}
+                          onChange={handleOtherPlatformChange}
+                          placeholder="Enter platform name..."
+                          className="mt-2"
+                        />
+                      )}
+                    </div>
+                  </div>
+                </RadioGroup>
 
                 <div className="flex justify-between">
                   <Button variant="outline" onClick={handleBack} className="px-4">

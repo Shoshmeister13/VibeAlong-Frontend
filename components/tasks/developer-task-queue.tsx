@@ -7,8 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "@/components/ui/use-toast"
-import { Clock, Zap, AlertCircle, CheckCircle2, Calendar, DollarSign, Sparkles } from "lucide-react"
-import { vibePlatforms } from "@/components/vibe-platform-logos"
+import { Clock, Zap, AlertCircle, CheckCircle2, Calendar, DollarSign } from "lucide-react"
 
 // Mock task data
 const mockTasks = [
@@ -166,12 +165,26 @@ export function DeveloperTaskQueue() {
   }
 
   const getPlatformLogo = (platformId: string) => {
-    const platform = vibePlatforms.find((p) => p.id === platformId)
-    if (!platform || !platform.logo) {
-      // Return a fallback icon if platform or logo is not found
-      return <Sparkles className="h-4 w-4 text-primary" />
-    }
-    return platform.logo
+    return (
+      <div className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-200 overflow-hidden">
+        <img
+          src={`/platform-logos/${platformId}-logo.png`}
+          alt={`${platformId} logo`}
+          className="w-4 h-4 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+            // Also replace with a fallback icon
+            const parent = target.parentElement
+            if (parent) {
+              parent.innerHTML =
+                '<span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg></span>'
+            }
+          }}
+        />
+      </div>
+    )
   }
 
   const getUrgencyColor = (urgency: string) => {

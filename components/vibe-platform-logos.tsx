@@ -1,12 +1,5 @@
 import {
-  Loveable,
-  Replit,
-  Bolt,
-  Base44,
   Other,
-  V0,
-  Cursor,
-  Windsurf,
   Codeium,
   Claude,
   Copilot,
@@ -18,7 +11,6 @@ import {
   GitLabAI,
   Cody,
 } from "./vibe-platform-icons"
-import Image from "next/image"
 
 // Prioritize the specifically requested platforms
 export const vibePlatforms = [
@@ -26,49 +18,140 @@ export const vibePlatforms = [
   {
     id: "loveable",
     name: "Loveable",
-    logo: <Loveable className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/lovable-logo.jpeg"
+          alt="Loveable"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "AI-powered design to code platform",
     primary: true,
   },
   {
     id: "base44",
     name: "Base44",
-    logo: <Base44 className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/base44-logo.png"
+          alt="Base44"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "AI-powered code transformation platform",
     primary: true,
   },
   {
     id: "v0",
     name: "v0",
-    logo: <V0 className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/v0-logo.png"
+          alt="v0"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "Vercel's AI-powered coding assistant",
     primary: true,
   },
   {
     id: "replit",
     name: "Replit",
-    logo: <Replit className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/replit-logo.png"
+          alt="Replit"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "Collaborative browser-based IDE",
     primary: true,
   },
   {
     id: "bolt",
     name: "Bolt",
-    logo: <Bolt className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/bolt-logo.png"
+          alt="Bolt"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "Lightning-fast AI code generation",
     primary: true,
   },
   {
     id: "windsurf",
     name: "Windsurf",
-    logo: <Windsurf className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/windsurf-logo.png"
+          alt="Windsurf"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "AI-powered web development platform",
     primary: true,
   },
   {
     id: "cursor",
     name: "Cursor",
-    logo: <Cursor className="w-6 h-6 sm:w-10 sm:h-10" />,
+    logo: (
+      <div className="flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
+          src="/platform-logos/cursor-logo.png"
+          alt="Cursor"
+          className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = "/placeholder-4m6jx.png"
+            target.onerror = null
+          }}
+        />
+      </div>
+    ),
     description: "AI-native code editor",
     primary: true,
   },
@@ -148,8 +231,8 @@ export const primaryVibePlatforms = [
     id: "v0",
     name: "v0",
     logo: (
-      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
-        <Image
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
           src="/platform-logos/v0-logo.png"
           alt="v0"
           width={32}
@@ -168,8 +251,8 @@ export const primaryVibePlatforms = [
     id: "lovable",
     name: "Lovable",
     logo: (
-      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
-        <Image
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
           src="/platform-logos/lovable-logo.jpeg"
           alt="Lovable"
           width={32}
@@ -188,8 +271,8 @@ export const primaryVibePlatforms = [
     id: "bolt",
     name: "Bolt",
     logo: (
-      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
-        <Image
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
           src="/platform-logos/bolt-logo.png"
           alt="Bolt"
           width={32}
@@ -208,8 +291,8 @@ export const primaryVibePlatforms = [
     id: "base44",
     name: "Base44",
     logo: (
-      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
-        <Image
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
           src="/platform-logos/base44-logo.png"
           alt="Base44"
           width={32}
@@ -228,8 +311,8 @@ export const primaryVibePlatforms = [
     id: "replit",
     name: "Replit",
     logo: (
-      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200">
-        <Image
+      <div className="flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <img
           src="/platform-logos/replit-logo.png"
           alt="Replit"
           width={32}
