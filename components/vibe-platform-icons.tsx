@@ -42,65 +42,65 @@ export function Other(props: React.SVGProps<SVGSVGElement>) {
 
 // Simplified V0 icon using Terminal icon
 export function V0(props: React.SVGProps<SVGSVGElement>) {
-  return <Terminal className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#000000" />
+  return <Terminal className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Cursor icon
 export function Cursor(props: React.SVGProps<SVGSVGElement>) {
-  return <MousePointer className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#0ea5e9" />
+  return <MousePointer className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Windsurf icon
 export function Windsurf(props: React.SVGProps<SVGSVGElement>) {
-  return <Wind className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#10b981" />
+  return <Wind className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Codeium icon
 export function Codeium(props: React.SVGProps<SVGSVGElement>) {
-  return <Cpu className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#6366f1" />
+  return <Cpu className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Claude icon
 export function Claude(props: React.SVGProps<SVGSVGElement>) {
-  return <Sparkles className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#9333ea" />
+  return <Sparkles className={props.className || "w-6 h-6 text-black"} />
 }
 
 // GitHub Copilot icon
 export function Copilot(props: React.SVGProps<SVGSVGElement>) {
-  return <Bot className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#3b82f6" />
+  return <Bot className={props.className || "w-6 h-6 text-black"} />
 }
 
 // CodeWhisperer icon
 export function CodeWhisperer(props: React.SVGProps<SVGSVGElement>) {
-  return <Braces className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#f97316" />
+  return <Braces className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Tabnine icon
 export function Tabnine(props: React.SVGProps<SVGSVGElement>) {
-  return <Layers className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#ec4899" />
+  return <Layers className={props.className || "w-6 h-6 text-black"} />
 }
 
 // CodeGPT icon
 export function CodeGPT(props: React.SVGProps<SVGSVGElement>) {
-  return <Brain className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#14b8a6" />
+  return <Brain className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Warp icon
 export function Warp(props: React.SVGProps<SVGSVGElement>) {
-  return <Compass className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#8b5cf6" />
+  return <Compass className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Bard icon
 export function Bard(props: React.SVGProps<SVGSVGElement>) {
-  return <Lightbulb className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#eab308" />
+  return <Lightbulb className={props.className || "w-6 h-6 text-black"} />
 }
 
 // GitLab AI icon
 export function GitLabAI(props: React.SVGProps<SVGSVGElement>) {
-  return <GitBranch className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#ef4444" />
+  return <GitBranch className={props.className || "w-6 h-6 text-black"} />
 }
 
 // Sourcegraph Cody icon
 export function Cody(props: React.SVGProps<SVGSVGElement>) {
-  return <Workflow className={props.className || "w-6 h-6 sm:w-10 sm:h-10"} color="#0284c7" />
+  return <Workflow className={props.className || "w-6 h-6 text-black"} />
 }

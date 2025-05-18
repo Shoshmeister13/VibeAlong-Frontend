@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "@/components/ui/use-toast"
-import { Clock, Zap, AlertCircle, CheckCircle2, Calendar, DollarSign } from "lucide-react"
+import { Clock, Zap, AlertCircle, CheckCircle2, Calendar, DollarSign, Sparkles } from "lucide-react"
 import { vibePlatforms } from "@/components/vibe-platform-logos"
 
 // Mock task data
@@ -167,7 +167,11 @@ export function DeveloperTaskQueue() {
 
   const getPlatformLogo = (platformId: string) => {
     const platform = vibePlatforms.find((p) => p.id === platformId)
-    return platform ? platform.logo : null
+    if (!platform || !platform.logo) {
+      // Return a fallback icon if platform or logo is not found
+      return <Sparkles className="h-4 w-4 text-primary" />
+    }
+    return platform.logo
   }
 
   const getUrgencyColor = (urgency: string) => {
