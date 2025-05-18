@@ -13,7 +13,6 @@ import {
   ArrowLeft,
   Check,
   Loader2,
-  ExternalLink,
   Info,
   Github,
   Mail,
@@ -21,6 +20,7 @@ import {
   EyeOff,
   Plus,
   CheckCircle2,
+  Terminal,
 } from "lucide-react"
 import { primaryVibePlatforms } from "@/components/vibe-platform-logos"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -384,8 +384,6 @@ export default function VibeCheckStart() {
         </div>
       )}
 
-      {/* Progress bar - Fixed to top */}
-
       {/* Main content */}
 
       {/* Progress bar - Above steps fields */}
@@ -422,72 +420,42 @@ export default function VibeCheckStart() {
                   {/* Why Get a Vibe Check Section - Now First */}
                   <motion.div
                     key="why-vibecheck"
-                    className="w-full max-w-3xl mb-10"
+                    className="w-full max-w-3xl mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="text-center mb-8">
-                      <h2 className="text-4xl font-bold mb-4">Why Get a Vibe Check?</h2>
+                    <div className="text-center mb-6">
+                      <h2 className="text-3xl font-bold mb-3">Why Get a Vibe Check?</h2>
                       <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Transform your vibe-coded project into production-ready software with expert insights and
-                        support.
+                        Transform your AI-generated code into production-ready software with expert insights.
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div className="flex items-start mb-4">
-                          <div className="bg-black rounded-full p-2 mr-4 flex-shrink-0">
-                            <CheckCircle2 className="h-5 w-5 text-white" />
-                          </div>
-                          <h3 className="font-semibold text-lg">Comprehensive Code Analysis</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-center mb-2">
+                          <CheckCircle2 className="h-5 w-5 text-black mr-2" />
+                          <h3 className="font-semibold">Code Analysis</h3>
                         </div>
-                        <p className="text-gray-600">
-                          Get detailed insights into code quality, architecture, and performance with our AI-powered
-                          analysis.
-                        </p>
+                        <p className="text-sm text-gray-600">Get insights on code quality and architecture</p>
                       </div>
 
-                      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div className="flex items-start mb-4">
-                          <div className="bg-black rounded-full p-2 mr-4 flex-shrink-0">
-                            <CheckCircle2 className="h-5 w-5 text-white" />
-                          </div>
-                          <h3 className="font-semibold text-lg">Customized Development Plan</h3>
+                      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-center mb-2">
+                          <CheckCircle2 className="h-5 w-5 text-black mr-2" />
+                          <h3 className="font-semibold">Development Plan</h3>
                         </div>
-                        <p className="text-gray-600">
-                          Receive a prioritized roadmap of tasks with time estimates—complete them yourself or 4x faster
-                          with our experts.
-                        </p>
+                        <p className="text-sm text-gray-600">Receive a prioritized roadmap with time estimates</p>
                       </div>
 
-                      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div className="flex items-start mb-4">
-                          <div className="bg-black rounded-full p-2 mr-4 flex-shrink-0">
-                            <CheckCircle2 className="h-5 w-5 text-white" />
-                          </div>
-                          <h3 className="font-semibold text-lg">Expert-Ready Task Board</h3>
+                      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-center mb-2">
+                          <CheckCircle2 className="h-5 w-5 text-black mr-2" />
+                          <h3 className="font-semibold">Expert Support</h3>
                         </div>
-                        <p className="text-gray-600">
-                          Access a Kanban board with ready-to-implement tasks that you can complete or assign to our
-                          vetted experts.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 shadow-sm mb-8">
-                      <div className="flex items-start">
-                        <div className="text-4xl text-black opacity-50 mr-4 font-serif leading-none">"</div>
-                        <div>
-                          <p className="text-gray-700 italic text-lg">
-                            The VibeCheck saved us weeks of development time. The analysis identified issues we hadn't
-                            caught, and the expert assistance helped us implement solutions 4x faster than we could have
-                            on our own.
-                          </p>
-                          <p className="text-gray-500 text-sm mt-3">— Alex Chen, CTO at TechStartup</p>
-                        </div>
+                        <p className="text-sm text-gray-600">Access vetted developers to implement tasks</p>
                       </div>
                     </div>
                   </motion.div>
@@ -503,10 +471,8 @@ export default function VibeCheckStart() {
                   >
                     <Card className="p-8 shadow-md rounded-xl border border-gray-200">
                       <div className="text-center mb-6">
-                        <h1 className="text-2xl font-bold mb-4">Join VibeAlong as a Vibe-Coder</h1>
-                        <p className="text-gray-600">
-                          Create your account to get started with VibeCheck and connect with top developers.
-                        </p>
+                        <h1 className="text-2xl font-bold mb-2">First, Open Your Account</h1>
+                        <p className="text-gray-600">Create an account to start your VibeCheck</p>
                       </div>
 
                       <div className="space-y-4 mb-6">
@@ -675,13 +641,11 @@ export default function VibeCheckStart() {
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <div className="text-center mb-6">
-                  <h1 className="text-2xl font-bold mb-4">🔗 Connect Your GitHub Project</h1>
-                  <p className="text-gray-600 mb-2">
-                    We'll scan your repo with <span className="font-semibold">read-only access</span> to generate your
-                    VibeCheck report.
+                <div className="text-center mb-4">
+                  <h1 className="text-2xl font-bold mb-2">🔗 Connect Your GitHub Project</h1>
+                  <p className="text-gray-600">
+                    We'll scan your repo with read-only access to generate your VibeCheck.
                   </p>
-                  <p className="text-gray-600">No code will be changed.</p>
                 </div>
 
                 {localStorage.getItem("vibecoder_auth_method") === "github" ? (
@@ -748,123 +712,46 @@ export default function VibeCheckStart() {
                   You'll be able to choose the specific repo to scan.
                 </p>
 
-                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                  <h3 className="font-semibold text-lg mb-4 flex items-center">
-                    <span className="bg-black text-white p-1 rounded-md mr-2">
-                      <Github className="h-4 w-4" />
-                    </span>
-                    No GitHub? No problem - integrate your project with GitHub
+                <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center">
+                    <Github className="h-4 w-4 mr-2" />
+                    No GitHub? Connect your project
                   </h3>
-                  <p className="text-gray-600 mb-6">
-                    Open your first project on GitHub using one of the following options, and come back here when you're
-                    done to start your VibeCheck.
-                  </p>
 
-                  <div className="space-y-6">
-                    <div className="bg-gray-50 p-5 rounded-lg border border-gray-100">
-                      <h4 className="font-semibold text-base mb-4">
-                        I already use a vibe-coding platform and want to sync it to GitHub
-                      </h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {primaryVibePlatforms.slice(0, 4).map((platform) => (
-                          <div
-                            key={platform.id}
-                            className="bg-white p-4 rounded-lg border border-gray-100 hover:border-gray-300 transition-all"
-                          >
-                            <div className="flex items-start">
-                              <div
-                                className="flex-shrink-0 mr-3 bg-gray-50 p-1 rounded-md flex items-center justify-center"
-                                style={{ width: "32px", height: "32px" }}
-                              >
-                                <div className="w-5 h-5 flex items-center justify-center">{platform.logo}</div>
-                              </div>
-                              <div>
-                                <p className="font-medium">{platform.name} Projects</p>
-                                <p className="text-sm text-gray-500 mb-2">
-                                  {platform.id === "v0"
-                                    ? "Export to GitHub from project settings → Integrations"
-                                    : platform.id === "replit"
-                                      ? "Use Git tab → Connect repository"
-                                      : platform.id === "lovable"
-                                        ? "Project dashboard → Export → GitHub"
-                                        : "Settings → Integrations → GitHub"}
-                                </p>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={
-                                    platform.id === "v0"
-                                      ? openV0GithubDocs
-                                      : platform.id === "replit"
-                                        ? openReplitGithubDocs
-                                        : undefined
-                                  }
-                                  className="text-xs flex items-center gap-1"
-                                >
-                                  Connect <ExternalLink className="h-3 w-3 ml-1" />
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                    {primaryVibePlatforms.slice(0, 4).map((platform) => (
+                      <div
+                        key={platform.id}
+                        className="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center"
+                      >
+                        <Terminal className="h-5 w-5 mr-2 text-gray-700" />
+                        <span className="font-medium">{platform.name}</span>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="ml-auto text-xs"
+                          onClick={
+                            platform.id === "v0"
+                              ? openV0GithubDocs
+                              : platform.id === "replit"
+                                ? openReplitGithubDocs
+                                : undefined
+                          }
+                        >
+                          Connect
+                        </Button>
                       </div>
-                    </div>
-
-                    <div className="bg-gray-50 p-5 rounded-lg border border-gray-100">
-                      <h4 className="font-semibold text-base mb-3">I don't use GitHub or a vibe-coding platform</h4>
-                      <p className="text-sm text-gray-500 mb-4">Create a GitHub account and start a new project.</p>
-                      <div className="space-y-4">
-                        <div className="flex items-start bg-white p-3 rounded-lg border border-gray-100">
-                          <div className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
-                            1
-                          </div>
-                          <div>
-                            <p className="font-medium">Sign up for a free GitHub account</p>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={openGithubSignup}
-                              className="mt-2 flex items-center gap-1"
-                            >
-                              Create GitHub Account <ExternalLink className="h-3 w-3 ml-1" />
-                            </Button>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start bg-white p-3 rounded-lg border border-gray-100">
-                          <div className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
-                            2
-                          </div>
-                          <div>
-                            <p className="font-medium">Create a new repository</p>
-                            <p className="text-sm text-gray-500">
-                              Click the "+" icon in the top right and select "New repository"
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start bg-white p-3 rounded-lg border border-gray-100">
-                          <div className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
-                            3
-                          </div>
-                          <div>
-                            <p className="font-medium">Upload your project files</p>
-                            <p className="text-sm text-gray-500">
-                              Use the "uploading an existing file" link on the empty repo page
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
 
-                  <div className="bg-black/5 p-4 rounded-lg border border-black/10 flex items-start mt-6">
-                    <Info className="h-4 w-4 mr-2 flex-shrink-0 mt-0.5 text-black" />
-                    <p className="text-sm text-gray-700">
-                      <span className="font-medium">Pro tip:</span> Connecting to GitHub enables version control,
-                      collaboration, and more detailed VibeCheck insights.
-                    </p>
-                  </div>
+                  <Button
+                    variant="link"
+                    onClick={openGithubSignup}
+                    className="text-sm text-gray-600 hover:text-black flex items-center mt-2"
+                  >
+                    <Plus className="h-3 w-3 mr-1" />
+                    Create a new GitHub account
+                  </Button>
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-gray-200">
@@ -890,11 +777,8 @@ export default function VibeCheckStart() {
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold mb-2">🛠️ Which platform are you using?</h2>
-                <p className="text-gray-600 mb-6">
-                  Knowing your development platform helps us tailor our recommendations to your specific workflow and
-                  tools.
-                </p>
+                <h2 className="text-xl font-bold mb-2">🛠️ Which platform are you using?</h2>
+                <p className="text-gray-600 mb-4">Select your development platform</p>
 
                 <div className="mb-8">
                   <RadioGroup value={selectedPlatform} onValueChange={handlePlatformSelect} className="space-y-4">
@@ -910,17 +794,7 @@ export default function VibeCheckStart() {
                       >
                         <RadioGroupItem value={platform.id} id={platform.id} className="sr-only" />
                         <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-50 rounded-md">
-                          <img
-                            src={
-                              platform.id === "lovable"
-                                ? "/platform-logos/lovable-logo.jpeg"
-                                : `/platform-logos/${platform.id}-logo.png`
-                            }
-                            alt={platform.name}
-                            className="max-w-full max-h-full object-contain"
-                            width={24}
-                            height={24}
-                          />
+                          <Terminal className="h-5 w-5 text-gray-700" />
                         </div>
                         <Label
                           htmlFor={platform.id}
@@ -993,11 +867,8 @@ export default function VibeCheckStart() {
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold mb-2">📝 What's the title of your project?</h2>
-                <p className="text-gray-600 mb-6">
-                  Your project name helps us understand its purpose and create more relevant suggestions for your
-                  codebase.
-                </p>
+                <h2 className="text-xl font-bold mb-2">📝 Project Title</h2>
+                <p className="text-gray-600 mb-4">What's your project called?</p>
 
                 <div className="mb-8">
                   <Input
@@ -1034,11 +905,8 @@ export default function VibeCheckStart() {
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold mb-2">📄 How would you describe your project?</h2>
-                <p className="text-gray-600 mb-6">
-                  A brief description helps us understand your project's goals and audience, allowing us to provide more
-                  targeted feedback.
-                </p>
+                <h2 className="text-xl font-bold mb-2">📄 Project Description</h2>
+                <p className="text-gray-600 mb-4">Briefly describe your project and its goals</p>
 
                 <div className="mb-8">
                   <Textarea
@@ -1079,11 +947,8 @@ I've implemented authentication, real-time updates, and basic analytics, but I'm
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold mb-2">🚀 What's your killer feature?</h2>
-                <p className="text-gray-600 mb-6">
-                  Identifying your standout feature helps us prioritize our recommendations to enhance what makes your
-                  project special.
-                </p>
+                <h2 className="text-xl font-bold mb-2">🚀 Key Feature</h2>
+                <p className="text-gray-600 mb-4">What's your project's standout feature?</p>
 
                 <div className="mb-8">
                   <Input
@@ -1120,11 +985,8 @@ I've implemented authentication, real-time updates, and basic analytics, but I'm
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold mb-2">🔮 What features are you planning to add later?</h2>
-                <p className="text-gray-600 mb-6">
-                  Understanding your roadmap helps us suggest architecture improvements that will make future features
-                  easier to implement.
-                </p>
+                <h2 className="text-xl font-bold mb-2">🔮 Planned Features</h2>
+                <p className="text-gray-600 mb-4">What features do you plan to add next?</p>
 
                 <div className="flex items-center space-x-3 mb-6">
                   <Input
@@ -1201,11 +1063,8 @@ I've implemented authentication, real-time updates, and basic analytics, but I'm
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold mb-2">😵 What's been challenging in your vibe-coding journey?</h2>
-                <p className="text-gray-600 mb-6">
-                  Sharing your pain points allows us to focus on solutions for the specific obstacles you're facing in
-                  your development process.
-                </p>
+                <h2 className="text-xl font-bold mb-2">😵 Development Challenges</h2>
+                <p className="text-gray-600 mb-4">What obstacles are you facing?</p>
 
                 <div className="mb-8">
                   <Textarea
@@ -1251,12 +1110,9 @@ I've implemented authentication, real-time updates, and basic analytics, but I'm
               transition={{ duration: 0.3 }}
             >
               <Card className="p-8 shadow-md rounded-xl border border-gray-200">
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold mb-2">✨ Ready for your personalized VibeCheck!</h2>
-                  <p className="text-gray-600">
-                    We've gathered everything we need to provide you with tailored insights to help you ship faster and
-                    better.
-                  </p>
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold mb-2">✨ Ready for VibeCheck!</h2>
+                  <p className="text-gray-600">We'll analyze your project and provide actionable insights</p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-100">
