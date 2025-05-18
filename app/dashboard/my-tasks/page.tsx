@@ -365,7 +365,7 @@ export default function MyTasksPage() {
 
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-4 overflow-x-auto">
             <TabsTrigger value="all">📋 All Tasks</TabsTrigger>
             <TabsTrigger value="open">📝 Open</TabsTrigger>
             <TabsTrigger value="in-progress">⏳ In Progress</TabsTrigger>
@@ -754,7 +754,7 @@ export default function MyTasksPage() {
                 )}
               </CardContent>
 
-              <CardFooter className="pt-0 pb-3 flex justify-end gap-2">
+              <CardFooter className="pt-0 pb-3 flex flex-wrap justify-end gap-2">
                 <Button variant="outline" onClick={() => handleViewTask(task.id)}>
                   View Details
                 </Button>

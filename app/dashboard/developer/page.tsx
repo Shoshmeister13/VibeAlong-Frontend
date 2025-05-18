@@ -156,7 +156,7 @@ export default function DeveloperDashboard() {
               Before you can apply for tasks, you need to complete a short screening quiz to verify your development
               knowledge. The quiz consists of 10 multiple-choice questions.
             </p>
-            <Button className="w-full" onClick={() => router.push("/developer-screening/quiz")}>
+            <Button className="w-full sm:w-auto" onClick={() => router.push("/developer-screening/quiz")}>
               Start Screening Quiz
             </Button>
           </div>
@@ -164,7 +164,7 @@ export default function DeveloperDashboard() {
       </Card>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Earnings This Month</CardTitle>
@@ -187,7 +187,7 @@ export default function DeveloperDashboard() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="sm:col-span-2 md:col-span-1">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Earnings</CardTitle>
           </CardHeader>
@@ -280,8 +280,8 @@ export default function DeveloperDashboard() {
               </div>
             ) : (
               <>
-                <div className="flex items-center justify-between p-2 hover:bg-slate-50 rounded-md transition-colors">
-                  <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between p-2 hover:bg-slate-50 rounded-md transition-colors">
+                  <div className="flex items-center gap-3 mb-2 sm:mb-0">
                     <Avatar>
                       <AvatarImage src="/abstract-tech-logo.png" />
                       <AvatarFallback>TC</AvatarFallback>
@@ -307,8 +307,8 @@ export default function DeveloperDashboard() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-2 hover:bg-slate-50 rounded-md transition-colors">
-                  <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between p-2 hover:bg-slate-50 rounded-md transition-colors">
+                  <div className="flex items-center gap-3 mb-2 sm:mb-0">
                     <Avatar>
                       <AvatarImage src="/abstract-finance-growth.png" />
                       <AvatarFallback>FC</AvatarFallback>
@@ -334,8 +334,8 @@ export default function DeveloperDashboard() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-2 hover:bg-slate-50 rounded-md transition-colors">
-                  <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between p-2 hover:bg-slate-50 rounded-md transition-colors">
+                  <div className="flex items-center gap-3 mb-2 sm:mb-0">
                     <Avatar>
                       <AvatarImage src="/interconnected-health.png" />
                       <AvatarFallback>HC</AvatarFallback>

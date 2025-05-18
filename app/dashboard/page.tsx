@@ -242,7 +242,7 @@ export default function VibeDashboard() {
         {/* Projects Section */}
         <Card>
           <CardHeader>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
               <div className="flex items-center gap-2">
                 <LayoutDashboard className="h-5 w-5 text-primary" />
                 <CardTitle>Current Project</CardTitle>
@@ -250,7 +250,7 @@ export default function VibeDashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <Card className="bg-gradient-to-br from-background to-muted/50">
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-2">
@@ -343,7 +343,7 @@ export default function VibeDashboard() {
         {/* Tasks Section */}
         <Card>
           <CardHeader>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
               <div className="flex items-center gap-2">
                 <ListTodo className="h-5 w-5 text-primary" />
                 <CardTitle>Project Tasks</CardTitle>
@@ -359,7 +359,7 @@ export default function VibeDashboard() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="current">
-              <TabsList className="mb-4">
+              <TabsList className="mb-4 w-full overflow-x-auto">
                 <TabsTrigger value="current" className="flex items-center gap-1">
                   <ListTodo className="h-4 w-4" />
                   Current Tasks
@@ -372,7 +372,7 @@ export default function VibeDashboard() {
 
               <TabsContent value="current">
                 {tasks.length > 0 ? (
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {tasks.slice(0, 6).map((task) => (
                       <Card key={task.id} className="overflow-hidden border-l-4 border-l-primary">
                         <CardHeader className="pb-2">
@@ -421,7 +421,7 @@ export default function VibeDashboard() {
               </TabsContent>
 
               <TabsContent value="suggested">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                   {suggestedTasks.map((task) => (
                     <Card key={task.id} className="overflow-hidden border-dashed border-l-4 border-l-purple-500">
                       <CardHeader className="pb-2">

@@ -74,7 +74,7 @@ export function ProfileSettings() {
             <p className="text-xs text-muted-foreground">Your email address cannot be changed</p>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-wrap gap-2">
           <Button onClick={handleSaveProfile}>Save Changes</Button>
         </CardFooter>
       </Card>
@@ -111,12 +111,12 @@ export function ProfileSettings() {
             </AlertDescription>
           </Alert>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-wrap gap-2">
           <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
             <DialogTrigger asChild>
               <Button variant="destructive">Delete Account</Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle>Are you absolutely sure?</DialogTitle>
                 <DialogDescription>
@@ -124,11 +124,11 @@ export function ProfileSettings() {
                   our servers.
                 </DialogDescription>
               </DialogHeader>
-              <DialogFooter>
-                <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              <DialogFooter className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-0">
+                <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="w-full sm:w-auto">
                   Cancel
                 </Button>
-                <Button variant="destructive" onClick={handleDeleteAccount}>
+                <Button variant="destructive" onClick={handleDeleteAccount} className="w-full sm:w-auto">
                   Delete Account
                 </Button>
               </DialogFooter>

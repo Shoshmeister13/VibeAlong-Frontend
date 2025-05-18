@@ -11,14 +11,11 @@ import {
   Clock,
   CheckCircle2,
   Clock4,
-  MessageSquare,
-  DollarSign,
-  User,
-  MoreVertical,
   AlertCircle,
-  FileText,
   Code,
-  Sparkles,
+  Tag,
+  ArrowRight,
+  Users2,
 } from "lucide-react"
 import { useSupabase } from "@/components/providers/supabase-provider"
 import { useAuth } from "@/components/providers/auth-provider"
@@ -26,9 +23,8 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
+import Link from "next/link"
 
 type TaskStatus = "pending" | "in_progress" | "completed" | "all"
 
@@ -433,187 +429,113 @@ export default function TasksPage() {
         {filteredTasks.map((task) => (
           <Card key={task.id} className="overflow-hidden hover:shadow-md transition-shadow">
             <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row justify-between gap-4">
+              <div className="flex flex-col md:flex-row justify-between gap-6">
                 <div className="flex-1">
-                  {/* Header with title and badges */}
-                  <div className="flex flex-wrap items-center mb-4 justify-between">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-xl font-semibold">{task.title}</h3>
-                      <Badge
-                        className={`${
-                          task.status === "Completed" || task.status === "completed"
-                            ? "bg-green-500"
-                            : task.status === "In Progress" || task.status === "in_progress"
-                              ? "bg-blue-500"
-                              : "bg-yellow-500"
-                        } flex items-center gap-1`}
-                      >
-                        {task.status === "Completed" || task.status === "completed" ? (
-                          <CheckCircle2 className="h-3 w-3" />
-                        ) : task.status === "In Progress" || task.status === "in_progress" ? (
-                          <Clock4 className="h-3 w-3" />
-                        ) : (
-                          <AlertCircle className="h-3 w-3" />
-                        )}
-                        {task.status}
-                      </Badge>
-                      <Badge
-                        className={`${
-                          task.priority === "High"
-                            ? "bg-red-500"
-                            : task.priority === "Medium"
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
-                        }`}
-                      >
-                        {task.priority}
-                      </Badge>
-                    </div>
+                  <div className="flex flex-wrap gap-2 items-center mb-3">
+                    <h3 className="text-lg font-semibold">{task.title}</h3>
+                    {getPriorityBadge(task.priority)}
+                    {getStatusBadge(task.status)}
+                    {getComplexityBadge(task.complexity)}
+                  </div>
 
-                    <div className="flex items-center gap-2">
-                      {/* Actions Menu */}
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-8 w-8">
-                            <MoreVertical className="h-4 w-4" />
-                            <span className="sr-only">Open menu</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem
-                            className="flex items-center gap-2 cursor-pointer"
-                            onClick={() => handleViewTask(task)}
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground mb-3">
+                    <span>
+                      Created by <span className="font-medium text-foreground">{task.created_by || "Unknown"}</span>
+                    </span>
+                  </div>
+
+                  {/* Project info badges */}
+                  <div className="flex flex-wrap gap-2 text-sm mb-4">
+                    <Badge variant="outline" className="flex items-center gap-1 bg-slate-50">
+                      <Tag className="h-3.5 w-3.5" />
+                      {task.project.name}
+                    </Badge>
+                    <Badge variant="outline" className="flex items-center gap-1 bg-slate-50">
+                      <Calendar className="h-3.5 w-3.5" />
+                      Due: {formatDate(task.due_date)}
+                    </Badge>
+                    <Badge variant="outline" className="flex items-center gap-1 bg-slate-50">
+                      <Code className="h-3.5 w-3.5" />
+                      {task.framework}
+                    </Badge>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{task.description}</p>
+
+                  {/* Progress bar */}
+                  <div className="mb-5">
+                    <div className="flex justify-between items-center mb-1.5">
+                      <span className="text-sm font-medium">Progress</span>
+                      <span className="text-sm font-medium">{task.progress}%</span>
+                    </div>
+                    <Progress value={task.progress} className="h-2" />
+                    <div className="flex justify-between items-center mt-1.5">
+                      <span className="text-xs text-muted-foreground">
+                        Last updated: {formatLastUpdated(task.last_updated)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 mt-4">
+                    <Button variant="outline" size="sm" onClick={() => handleViewDetails(task)}>
+                      View Details
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                    <Button size="sm" asChild>
+                      <Link href={`/task/${task.id}/collaborate`}>
+                        <Users2 className="mr-2 h-4 w-4" />
+                        Task Space
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end justify-center gap-2 min-w-[140px] mt-4 md:mt-0">
+                  <div className="text-right flex items-center gap-2">
+                    <div className="relative group">
+                      <div className="text-sm font-medium flex items-center">
+                        Task Estimation
+                        <span className="ml-1 cursor-help">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="text-muted-foreground"
                           >
-                            <FileText className="h-4 w-4" /> View Details
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            className="flex items-center gap-2 cursor-pointer"
-                            onClick={() => router.push(`/task/${task.id}/collaborate`)}
-                          >
-                            <MessageSquare className="h-4 w-4" /> Task Space
-                          </DropdownMenuItem>
-                          {!task.assigned_developer && (
-                            <DropdownMenuItem
-                              className="flex items-center gap-2 cursor-pointer"
-                              onClick={() => router.push(`/dashboard/tasks/${task.id}/assign`)}
-                            >
-                              <User className="h-4 w-4" /> Assign Developer
-                            </DropdownMenuItem>
-                          )}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  </div>
-
-                  {/* Task metadata */}
-                  <div className="flex flex-col gap-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex flex-wrap gap-4">
-                      <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        Due: {task.due_date ? new Date(task.due_date).toLocaleDateString() : "No due date"}
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                          </svg>
+                        </span>
                       </div>
-                      <div className="flex items-center">
-                        <Clock className="h-4 w-4 mr-1" />
-                        Created: {new Date(task.created_at).toLocaleDateString()}
-                      </div>
-                    </div>
+                      <div className="text-xl font-bold mt-1">${formatNumberWithCommas(task.ai_estimated_price)}</div>
 
-                    {/* Developer Assignment */}
-                    <div className="flex items-center mt-1">
-                      <User className="h-4 w-4 mr-1" />
-                      {task.assigned_developer ? (
-                        <div className="flex items-center">
-                          <span className="mr-1">Assigned to:</span>
-                          <Avatar className="h-5 w-5 mr-1">
-                            <AvatarImage
-                              src={task.assigned_developer?.avatar_url || "/placeholder.svg"}
-                              alt={task.assigned_developer?.name}
-                            />
-                            <AvatarFallback>{task.assigned_developer?.name?.charAt(0) || "D"}</AvatarFallback>
-                          </Avatar>
-                          <span className="font-medium">{task.assigned_developer?.name || "Unknown"}</span>
-                        </div>
-                      ) : (
-                        <span className="text-yellow-600">Unassigned</span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Task Description and AI Summary */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="bg-secondary/20 border rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FileText className="h-4 w-4" />
-                        <span className="font-medium">Description</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{task.description}</p>
-
-                      {/* Tech Stack */}
-                      {task.stack && (
-                        <div className="mt-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Code className="h-4 w-4" />
-                            <span className="font-medium">Tech Stack</span>
-                          </div>
-                          <div className="flex flex-wrap gap-1">
-                            {task.stack.map((tech: string) => (
-                              <Badge key={tech} variant="secondary" className="bg-secondary/50">
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="bg-primary/5 border rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Sparkles className="h-4 w-4 text-primary" />
-                        <span className="font-medium">AI Summary</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{task.ai_summary || "No AI summary available."}</p>
-
-                      {/* Time and Budget Estimates */}
-                      <div className="grid grid-cols-2 gap-2 mt-4">
-                        <div className="text-sm">
-                          <span className="font-medium">Est. Time:</span>
-                          <div className="flex items-center text-muted-foreground">
-                            <Clock className="h-4 w-4 mr-1" />
-                            {task.estimated_time_hours || "N/A"} hours
-                          </div>
-                        </div>
-                        <div className="text-sm">
-                          <span className="font-medium">Est. Budget:</span>
-                          <div className="flex items-center text-muted-foreground">
-                            <DollarSign className="h-4 w-4 mr-1" />${task.estimated_cost_usd || "N/A"}
-                          </div>
-                        </div>
+                      {/* Fixed tooltip that stays visible when hovered */}
+                      <div
+                        className="fixed opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                            p-3 bg-black text-white text-xs rounded-md shadow-lg z-[9999]"
+                        style={{
+                          bottom: "calc(100% + 10px)",
+                          right: "0",
+                          width: "240px",
+                          pointerEvents: "none",
+                          transform: "translateY(0)",
+                        }}
+                      >
+                        Estimated by VibeAlong AI. Actual work may be up to 10% more than the estimate.
                       </div>
                     </div>
                   </div>
-
-                  {/* Progress bar for in-progress tasks */}
-                  {(task.status === "In Progress" || task.status === "in_progress") && task.progress !== undefined && (
-                    <div className="mb-4">
-                      <div className="flex justify-between text-sm mb-1">
-                        <span>Progress</span>
-                        <span className="font-medium">{task.progress}%</span>
-                      </div>
-                      <Progress value={task.progress} className="h-2" />
-                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                        <div className="flex items-center">
-                          <Clock className="h-3 w-3 mr-1" />
-                          Last update: {task.last_update ? new Date(task.last_update).toLocaleString() : "N/A"}
-                        </div>
-                        {task.messages > 0 && (
-                          <div className="flex items-center text-blue-600">
-                            <MessageSquare className="h-3 w-3 mr-1" />
-                            {task.messages} new message{task.messages > 1 ? "s" : ""}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{task.ai_estimated_hours} hours</span>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -652,5 +574,72 @@ export default function TasksPage() {
         </Button>
       </div>
     )
+  }
+
+  function getPriorityBadge(priority: string) {
+    let badgeColor = "bg-green-500" // Default to low priority
+    if (priority === "High") {
+      badgeColor = "bg-red-500"
+    } else if (priority === "Medium") {
+      badgeColor = "bg-yellow-500"
+    }
+
+    return <Badge className={`${badgeColor}`}>{priority}</Badge>
+  }
+
+  function getStatusBadge(status: string) {
+    let badgeColor = "bg-yellow-500" // Default to pending
+    let icon = <AlertCircle className="h-3 w-3" />
+
+    if (status === "Completed" || status === "completed") {
+      badgeColor = "bg-green-500"
+      icon = <CheckCircle2 className="h-3 w-3" />
+    } else if (status === "In Progress" || status === "in_progress") {
+      badgeColor = "bg-blue-500"
+      icon = <Clock4 className="h-3 w-3" />
+    }
+
+    return (
+      <Badge className={`${badgeColor} flex items-center gap-1`}>
+        {icon}
+        {status}
+      </Badge>
+    )
+  }
+
+  function getComplexityBadge(complexity: string) {
+    if (!complexity) return null
+
+    const badgeColor = "bg-blue-500" // Default color
+    return <Badge className={`${badgeColor}`}>{complexity}</Badge>
+  }
+
+  function formatDate(dateStr: string) {
+    try {
+      const date = new Date(dateStr)
+      return date.toLocaleDateString()
+    } catch (error) {
+      console.error("Error formatting date:", error)
+      return "N/A"
+    }
+  }
+
+  function formatLastUpdated(dateStr: string) {
+    try {
+      const date = new Date(dateStr)
+      return date.toLocaleString()
+    } catch (error) {
+      console.error("Error formatting last updated date:", error)
+      return "N/A"
+    }
+  }
+
+  function formatNumberWithCommas(number: number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  }
+
+  const handleViewDetails = (task: any) => {
+    setSelectedTask(task)
+    setIsDetailDialogOpen(true)
   }
 }

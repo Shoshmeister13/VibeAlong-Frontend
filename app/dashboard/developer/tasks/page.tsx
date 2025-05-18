@@ -380,7 +380,7 @@ export default function DeveloperTasksPage() {
                           </div>
                         </div>
 
-                        <div className="flex flex-col items-end justify-center gap-2 min-w-[140px]">
+                        <div className="flex flex-col items-end justify-center gap-2 min-w-[140px] mt-4 md:mt-0">
                           <div className="text-right flex items-center gap-2">
                             <div className="relative group">
                               <div className="text-sm font-medium flex items-center">
